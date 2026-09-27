@@ -11,7 +11,11 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   })
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value))
+    try {
+      localStorage.setItem(key, JSON.stringify(value))
+    } catch {
+      // Keep the in-memory state usable when storage is unavailable or full.
+    }
   }, [key, value])
 
   return [value, setValue] as const

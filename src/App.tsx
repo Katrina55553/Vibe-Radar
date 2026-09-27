@@ -90,7 +90,11 @@ export default function App() {
       </main>
 
       <footer className="site"><div className="wrap"><button className="footer-link" onClick={() => setWeeklyVisible(true)}>更新日志</button><span>每周五 08:00 定时刷新</span><span className="brand">Vibe Coding 雷达</span></div></footer>
-      <ProjectModal project={selectedProject} onClose={closeModal} onCopied={() => setToast('Prompt 已复制，去粘贴给你的 AI 编程助手吧')} />
+      <ProjectModal
+        project={selectedProject}
+        onClose={closeModal}
+        onCopyResult={(copied) => setToast(copied ? 'Prompt 已复制，去粘贴给你的 AI 编程助手吧' : '复制失败，请手动选中 Prompt 复制')}
+      />
 
       {weeklyVisible && <div className="weekly show"><div className="wd"><span className="date mono">2026-09-26</span><button onClick={dismissWeekly} aria-label="关闭更新提醒">×</button></div><h4>本周项目榜更新</h4><p>本周新建项目补齐新手第一步，新星信号同步核验。</p><ul><li>新增 Laya、ZCode 等 10 个上升项目</li><li>新星榜同步更新，常青项目库保持不变</li><li>Star 为核验时累计值，不代表精确 7 日增量</li></ul><div className="wact"><button className="btn" onClick={dismissWeekly}>知道了</button></div></div>}
       <div className={`toast${toast ? ' show' : ''}`} role="status">{toast}</div>

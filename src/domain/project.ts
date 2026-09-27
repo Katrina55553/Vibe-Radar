@@ -24,7 +24,7 @@ export interface ProjectInput {
 
 export interface Project extends ProjectInput {
   form: ProjectForm
-  goal: Exclude<ProjectGoal, '技术探索'>
+  goal: ProjectGoal
   time: ProjectTime
   exp: ProjectExperience
   ease: number
@@ -64,8 +64,9 @@ function formOf(project: ProjectInput): ProjectForm {
 }
 
 function goalOf(project: ProjectInput): Project['goal'] {
+  const text = project.title + project.desc + project.tags.join('') + project.source
+  if (/AI|Agent|RAG|LLM|模型|WebGL|Web Audio|Canvas|物理|算法|渲染|着色器|语音|OCR|自动化|机器人|SDR|ESP32|树莓派|传感器|MQTT/i.test(text)) return '技术探索'
   if (trackMeta[project.track].key === 'play') return '拿来演示'
-  const text = project.title + project.desc + project.tags.join('')
   return /个人|家庭|家人|生活|相册|食谱|财务|密码|订阅|植物|照片/.test(text) ? '日常自用' : '工作提效'
 }
 

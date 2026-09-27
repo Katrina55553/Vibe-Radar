@@ -47,11 +47,17 @@ export function ProjectPicker({ projects, picks, onChange, onOpen }: Props) {
         <div className="reco-grid">
           {recommended.map((project, index) => {
             const meta = trackMeta[project.track]
+            const matches = [
+              project.goal === picks.goal ? `目标“${picks.goal}”` : null,
+              project.time === picks.time ? `时间“${picks.time}”` : null,
+              project.form === picks.form ? `形式“${picks.form}”` : null,
+              project.exp === picks.exp ? `经验“${picks.exp}”` : null,
+            ].filter((match): match is string => Boolean(match))
             return (
               <article className="reco-card" key={`${project.track}-${project.rank}`}>
                 <div className="top"><span className="rk">#{index + 1}</span><span className={`trk ${meta.key}`}>{meta.short}</span><span className="score">{project.total}</span></div>
                 <h3>{project.title}</h3>
-                <p className="why">适合“{picks.time}”开工：{meta.short}方向匹配“{picks.goal}”，先做一个{project.form}形态的 MVP。</p>
+                <p className="why">推荐理由：{matches.length > 0 ? `匹配${matches.join('、')}` : '综合排名靠前'}；先做一个{project.form}形态的 MVP。</p>
                 <div className="tags">{project.tags.slice(0, 3).map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
                 <div className="reco-actions"><button className="mini-btn solid" onClick={() => onOpen(project)}>一键开工 · 体检+Prompt</button></div>
               </article>

@@ -4,7 +4,7 @@ import { trackMeta, type Project } from '../domain/project'
 interface Props {
   project: Project | null
   onClose: () => void
-  onCopied: () => void
+  onCopyResult: (copied: boolean) => void
 }
 
 function projectPrompt(project: Project) {
@@ -18,16 +18,43 @@ ${project.desc}
 时间预算：${project.time}。参考来源：${project.source}。`
 }
 
-export function ProjectModal({ project, onClose, onCopied }: Props) {
+export function ProjectModal({ project, onClose, onCopyResult }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     if (!project) return
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     closeRef.current?.focus()
-    const onKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose() }
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (event.key !== 'Tab') return
+
+      const focusable = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? [])
+      const first = focusable[0]
+      const last = focusable.at(-1)
+      if (!first || !last) return
+
+      if (event.shiftKey && (document.activeElement === first || !dialogRef.current?.contains(document.activeElement))) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
     document.addEventListener('keydown', onKeyDown)
-    return () => { document.body.style.overflow = ''; document.removeEventListener('keydown', onKeyDown) }
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', onKeyDown)
+      previousFocusRef.current?.focus()
+    }
   }, [project, onClose])
 
   if (!project) return null
@@ -36,13 +63,18 @@ export function ProjectModal({ project, onClose, onCopied }: Props) {
   const steps = [project.mvp, `打磨核心体验：把「${project.tags[0]}」和「${project.tags[1]}」做顺手，加一个让人“哇”的细节。`, '导出或分享成果，发给朋友收集第一波反馈，再决定要不要迭代。']
 
   async function copyPrompt() {
-    await navigator.clipboard.writeText(prompt)
-    onCopied()
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard API unavailable')
+      await navigator.clipboard.writeText(prompt)
+      onCopyResult(true)
+    } catch {
+      onCopyResult(false)
+    }
   }
 
   return (
     <div className="modal-mask show" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose() }}>
-      <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div ref={dialogRef} className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div className="mhead"><h3 id="modal-title">#{project.rank} {project.title}</h3><button ref={closeRef} className="x" onClick={onClose} aria-label="关闭">×</button></div>
         <div className="tags" style={{ marginTop: 10 }}><span className="tag hot">{meta.short}路线</span>{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
         <div className="scores">{([['上手友好', project.ease], ['效果直观', project.wow], ['实用价值', project.useful]] as const).map(([label, value]) => <div className="score-row" key={label}><span>{label}</span><span className="bar"><i style={{ width: `${value}%` }} /></span><span className="val">{value}</span></div>)}</div>

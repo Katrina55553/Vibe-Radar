@@ -13,6 +13,15 @@ describe('project recommendation', () => {
     expect(new Set(result.map((project) => project.track)).size).toBe(3)
   })
 
+  it('uses the technical-exploration goal to change recommendations', () => {
+    const exploration = recommendProjects(projects, { ...defaultPicks, goal: '技术探索' })
+    const showcase = recommendProjects(projects, { ...defaultPicks, goal: '拿来演示' })
+
+    expect(projects.some((project) => project.goal === '技术探索')).toBe(true)
+    expect(exploration.map((project) => project.title)).not.toEqual(showcase.map((project) => project.title))
+    expect(exploration.some((project) => project.goal === '技术探索')).toBe(true)
+  })
+
   it('searches project title, tags, source, description, and MVP', () => {
     const project = projects[0]!
     expect(matchesQuery(project, project.title.slice(0, 3))).toBe(true)
