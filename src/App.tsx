@@ -3,6 +3,7 @@ import { ProjectBoard, type BoardTab } from './components/ProjectBoard'
 import { ProjectModal } from './components/ProjectModal'
 import { ProjectPicker } from './components/ProjectPicker'
 import { StarGrid } from './components/StarGrid'
+import { GitHubRadarPage } from './components/GitHubRadarPage'
 import { defaultPicks, references, stars } from './data/content'
 import { projectInputs } from './data/projects'
 import { enrichProject, type Project } from './domain/project'
@@ -16,7 +17,7 @@ function initialTab(): BoardTab {
   return tab && validTabs.has(tab) ? tab : 'all'
 }
 
-export default function App() {
+function ProjectRadarApp() {
   const [picks, setPicks] = useState(defaultPicks)
   const [tab, setTab] = useState<BoardTab>(initialTab)
   const [query, setQuery] = useState('')
@@ -67,7 +68,7 @@ export default function App() {
   return (
     <>
       <a className="skip" href="#board">跳到榜单</a>
-      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#stars">明星项目</a><a href="#picker">帮我选</a></nav></div></header>
+      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#stars">明星项目</a><a href="#picker">帮我选</a><a href="?view=github">GitHub 动态榜</a></nav></div></header>
 
       <main id="top">
         <div className="wrap hero">
@@ -100,4 +101,8 @@ export default function App() {
       <div className={`toast${toast ? ' show' : ''}`} role="status">{toast}</div>
     </>
   )
+}
+
+export default function App() {
+  return new URLSearchParams(location.search).get('view') === 'github' ? <GitHubRadarPage /> : <ProjectRadarApp />
 }

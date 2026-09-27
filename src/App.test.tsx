@@ -91,4 +91,17 @@ describe('App', () => {
     fireEvent.click(close)
     expect(opener).toHaveFocus()
   })
+
+  it('renders and filters the GitHub candidate page', () => {
+    history.replaceState(null, '', '/?view=github')
+    const { container } = render(<App />)
+
+    expect(screen.getByRole('heading', { name: /GitHub.*动态榜/ })).toBeInTheDocument()
+    expect(container.querySelectorAll('.candidate-row')).toHaveLength(6)
+    expect(container.querySelector('.candidate-row h3')).toHaveTextContent('NandhaKishorM/laya')
+
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'Kotlin' } })
+    expect(container.querySelectorAll('.candidate-row')).toHaveLength(1)
+    expect(container.querySelector('.candidate-row h3')).toHaveTextContent('jev-chat/jev-chat-jarvis')
+  })
 })
