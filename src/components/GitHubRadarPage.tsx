@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { githubSnapshot, type GitHubCandidate } from '../data/github.generated'
+import { githubSnapshot, type GitHubCandidate } from '../data/github'
 
 type SortKey = 'growth' | 'stars' | 'updated'
 

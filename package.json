@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "update:github": "node scripts/update-github-radar.mjs",
+    "update:github:dry": "node scripts/update-github-radar.mjs --dry-run",
     "test": "vitest run",
     "test:watch": "vitest"
   },

@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import App from './App'
+import { githubSnapshot } from './data/github'
 
 describe('App', () => {
   afterEach(() => {
@@ -95,13 +96,13 @@ describe('App', () => {
   it('renders and filters the GitHub candidate page', () => {
     history.replaceState(null, '', '/?view=github')
     const { container } = render(<App />)
+    const candidate = githubSnapshot.candidates[0]!
 
     expect(screen.getByRole('heading', { name: /GitHub.*动态榜/ })).toBeInTheDocument()
-    expect(container.querySelectorAll('.candidate-row')).toHaveLength(6)
-    expect(container.querySelector('.candidate-row h3')).toHaveTextContent('NandhaKishorM/laya')
+    expect(container.querySelectorAll('.candidate-row')).toHaveLength(githubSnapshot.candidates.length)
 
-    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'Kotlin' } })
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: candidate.repo } })
     expect(container.querySelectorAll('.candidate-row')).toHaveLength(1)
-    expect(container.querySelector('.candidate-row h3')).toHaveTextContent('jev-chat/jev-chat-jarvis')
+    expect(container.querySelector('.candidate-row h3')).toHaveTextContent(candidate.repo)
   })
 })
