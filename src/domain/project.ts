@@ -1,0 +1,97 @@
+export const tracks = ['最好玩的项目', '最好用的项目', '最好搓的项目'] as const
+export type Track = (typeof tracks)[number]
+
+export const forms = ['网页互动', '文档/数据', 'AI Agent', '硬件设备'] as const
+export const goals = ['拿来演示', '日常自用', '工作提效', '技术探索'] as const
+export const times = ['2 小时见效', '周末完成', '一周打磨', '长期迭代'] as const
+export const experiences = ['刚开始', '能装依赖', '能接 API', '能折腾硬件'] as const
+
+export type ProjectForm = (typeof forms)[number]
+export type ProjectGoal = (typeof goals)[number]
+export type ProjectTime = (typeof times)[number]
+export type ProjectExperience = (typeof experiences)[number]
+
+export interface ProjectInput {
+  rank: number
+  track: Track
+  likes: number
+  title: string
+  desc: string
+  mvp: string
+  tags: string[]
+  source: string
+}
+
+export interface Project extends ProjectInput {
+  form: ProjectForm
+  goal: Exclude<ProjectGoal, '技术探索'>
+  time: ProjectTime
+  exp: ProjectExperience
+  ease: number
+  wow: number
+  useful: number
+  total: number
+}
+
+export interface PickState {
+  time: ProjectTime
+  goal: ProjectGoal
+  form: ProjectForm
+  exp: ProjectExperience
+}
+
+export type TrackKey = 'play' | 'use' | 'make'
+
+export interface TrackMeta {
+  key: TrackKey
+  short: string
+  label: string
+  lane: Track
+}
+
+export const trackMeta: Record<Track, TrackMeta> = {
+  最好玩的项目: { key: 'play', short: '好玩', label: 'PLAY', lane: '最好玩的项目' },
+  最好用的项目: { key: 'use', short: '好用', label: 'USE', lane: '最好用的项目' },
+  最好搓的项目: { key: 'make', short: '好搓', label: 'MAKE', lane: '最好搓的项目' },
+}
+
+function formOf(project: ProjectInput): ProjectForm {
+  if (trackMeta[project.track].key === 'make') return '硬件设备'
+  const text = project.title + project.tags.join('') + project.desc
+  if (/AI|Agent|RAG|模型|LLM|智能|语音|OCR|自动化/i.test(text)) return 'AI Agent'
+  if (/文档|PDF|表格|搜索|资料|笔记|知识|档案|库|Wiki|SOP|手册|CRM|后台/.test(text)) return '文档/数据'
+  return '网页互动'
+}
+
+function goalOf(project: ProjectInput): Project['goal'] {
+  if (trackMeta[project.track].key === 'play') return '拿来演示'
+  const text = project.title + project.desc + project.tags.join('')
+  return /个人|家庭|家人|生活|相册|食谱|财务|密码|订阅|植物|照片/.test(text) ? '日常自用' : '工作提效'
+}
+
+function timeOf(project: ProjectInput): ProjectTime {
+  const key = trackMeta[project.track].key
+  if (key === 'make') return project.rank <= 10 ? '一周打磨' : '长期迭代'
+  if (key === 'use') return project.rank <= 12 ? '周末完成' : '一周打磨'
+  return project.rank <= 12 ? '2 小时见效' : '周末完成'
+}
+
+function experienceOf(project: ProjectInput): ProjectExperience {
+  if (trackMeta[project.track].key === 'make') return '能折腾硬件'
+  const text = project.tags.join('') + project.desc
+  if (/自托管|部署|API|数据库|MQTT|服务|同步|固件|网关|账号/.test(text)) return '能接 API'
+  if (trackMeta[project.track].key === 'use' && project.rank <= 10) return '能装依赖'
+  return '刚开始'
+}
+
+export function enrichProject(input: ProjectInput): Project {
+  const form = formOf(input)
+  const goal = goalOf(input)
+  const time = timeOf(input)
+  const exp = experienceOf(input)
+  const key = trackMeta[input.track].key
+  const ease = Math.min(98, Math.round(88 - (input.rank - 1) * 1.1 + Math.min(input.likes, 20) * 0.4 + (exp === '刚开始' ? 6 : 0)))
+  const wow = Math.min(98, Math.round((key === 'play' ? 90 : key === 'use' ? 72 : 80) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.3))
+  const useful = Math.min(98, Math.round((key === 'use' ? 90 : key === 'play' ? 70 : 84) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.25))
+  return { ...input, form, goal, time, exp, ease, wow, useful, total: Math.round((ease + wow + useful) / 3) }
+}

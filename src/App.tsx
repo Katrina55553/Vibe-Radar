@@ -1,0 +1,99 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { ProjectBoard, type BoardTab } from './components/ProjectBoard'
+import { ProjectModal } from './components/ProjectModal'
+import { ProjectPicker } from './components/ProjectPicker'
+import { StarGrid } from './components/StarGrid'
+import { defaultPicks, references, stars } from './data/content'
+import { projectInputs } from './data/projects'
+import { enrichProject, type Project } from './domain/project'
+import { useLocalStorage } from './hooks/useLocalStorage'
+
+const projects = projectInputs.map(enrichProject)
+const validTabs = new Set<BoardTab>(['all', 'play', 'use', 'make', 'star'])
+
+function initialTab(): BoardTab {
+  const tab = new URLSearchParams(location.search).get('tab') as BoardTab | null
+  return tab && validTabs.has(tab) ? tab : 'all'
+}
+
+export default function App() {
+  const [picks, setPicks] = useState(defaultPicks)
+  const [tab, setTab] = useState<BoardTab>(initialTab)
+  const [query, setQuery] = useState('')
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [likedIds, setLikedIds] = useLocalStorage<Record<string, true>>('vcr-likes', {})
+  const [weeklyDismissed, setWeeklyDismissed] = useLocalStorage('vcr-weekly-20260926', false)
+  const [weeklyVisible, setWeeklyVisible] = useState(false)
+  const [toast, setToast] = useState('')
+
+  useEffect(() => {
+    if (weeklyDismissed) return
+    const timer = window.setTimeout(() => setWeeklyVisible(true), 1200)
+    return () => window.clearTimeout(timer)
+  }, [weeklyDismissed])
+
+  useEffect(() => {
+    if (!toast) return
+    const timer = window.setTimeout(() => setToast(''), 2200)
+    return () => window.clearTimeout(timer)
+  }, [toast])
+
+  const closeModal = useCallback(() => setSelectedProject(null), [])
+  const totalLikes = useMemo(() => projects.reduce((sum, project) => sum + project.likes, 0) + Object.keys(likedIds).length, [likedIds])
+
+  function changeTab(nextTab: BoardTab) {
+    setTab(nextTab)
+    const url = new URL(location.href)
+    if (nextTab === 'all') url.searchParams.delete('tab')
+    else url.searchParams.set('tab', nextTab)
+    history.replaceState(null, '', url)
+  }
+
+  function toggleLike(project: Project) {
+    const id = `${project.track}#${project.rank}`
+    setLikedIds((current) => {
+      const next = { ...current }
+      if (next[id]) delete next[id]
+      else next[id] = true
+      return next
+    })
+  }
+
+  function dismissWeekly() {
+    setWeeklyVisible(false)
+    setWeeklyDismissed(true)
+  }
+
+  return (
+    <>
+      <a className="skip" href="#board">跳到榜单</a>
+      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#stars">明星项目</a><a href="#picker">帮我选</a></nav></div></header>
+
+      <main id="top">
+        <div className="wrap hero">
+          <div>
+            <p className="eyebrow mono">Beginner-friendly project board · 更新 2026/09/26</p>
+            <h1>Vibe Coding<br /><span className="radar">雷达</span></h1>
+            <p className="lede">给刚开始 Coding 的新手，把<b>好玩、好用、好搓（硬件）</b>三条路线整理成一张 90 项可分享榜单：每个项目都有 MVP、体验标签、参考来源和三维评分。现在还能按时间、目标和经验生成适合你的开工清单。</p>
+            <div className="update-note"><strong>每周五 08:00 更新</strong><span>新星项目与常青项目库同步核验</span></div>
+            <div className="cta-row"><a className="btn primary" href="#picker">帮我选项目 ↓</a><a className="btn" href="#board">直接看榜单</a></div>
+          </div>
+          <aside className="stats" aria-label="榜单概览"><h3 className="mono">Selection Overview</h3><div className="grid">
+            <div className="stat"><div className="k">SELECTION INDEX</div><div className="v">90</div></div><div className="stat"><div className="k">TRACKS</div><div className="v">3<em>+1</em></div></div><div className="stat"><div className="k">TOP SCORE</div><div className="v"><em>98</em></div></div><div className="stat"><div className="k">MVP SPAN</div><div className="v">1-7d</div></div><div className="stat"><div className="k">RISING</div><div className="v">10</div></div><div className="stat"><div className="k">LIKED</div><div className="v">{totalLikes}</div></div>
+          </div></aside>
+        </div>
+
+        <section className="block wrap" id="stars"><div className="sec-head"><span className="mono">Rising this week</span><h2>明星项目</h2></div><p className="sec-sub">本周增长最快的 GitHub 项目，来自 GitHub Trending weekly 候选池，并按核验时累计 stars 重新排序。</p><StarGrid stars={stars} /></section>
+        <ProjectPicker projects={projects} picks={picks} onChange={setPicks} onOpen={setSelectedProject} />
+        <ProjectBoard projects={projects} tab={tab} query={query} likedIds={likedIds} onTabChange={changeTab} onQueryChange={setQuery} onToggleLike={toggleLike} onOpen={setSelectedProject} />
+        <section className="block wrap"><div className="sec-head"><span className="mono">Reference</span><h2>发现渠道</h2></div><div className="refs">{references.map((reference) => { const search = reference.replace(/^GitHub · |^Awesome · /, '').replace(/ topic$/, ''); return <a href={`https://github.com/search?q=${encodeURIComponent(search)}`} target="_blank" rel="noopener noreferrer" key={reference}>{reference}</a> })}</div></section>
+      </main>
+
+      <footer className="site"><div className="wrap"><button className="footer-link" onClick={() => setWeeklyVisible(true)}>更新日志</button><span>每周五 08:00 定时刷新</span><span className="brand">Vibe Coding 雷达</span></div></footer>
+      <ProjectModal project={selectedProject} onClose={closeModal} onCopied={() => setToast('Prompt 已复制，去粘贴给你的 AI 编程助手吧')} />
+
+      {weeklyVisible && <div className="weekly show"><div className="wd"><span className="date mono">2026-09-26</span><button onClick={dismissWeekly} aria-label="关闭更新提醒">×</button></div><h4>本周项目榜更新</h4><p>本周新建项目补齐新手第一步，新星信号同步核验。</p><ul><li>新增 Laya、ZCode 等 10 个上升项目</li><li>新星榜同步更新，常青项目库保持不变</li><li>Star 为核验时累计值，不代表精确 7 日增量</li></ul><div className="wact"><button className="btn" onClick={dismissWeekly}>知道了</button></div></div>}
+      <div className={`toast${toast ? ' show' : ''}`} role="status">{toast}</div>
+    </>
+  )
+}
