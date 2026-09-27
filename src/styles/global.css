@@ -270,6 +270,7 @@ footer.site .brand{margin-left:auto;font-weight:800;color:var(--ink)}
   .star-grid,.reco-grid{grid-template-columns:1fr}
   .board-3col,.lane.solo .cards{grid-template-columns:1fr}
   nav.pages a:not(.active){display:none}
+  nav.pages a.mobile-visible{display:flex}
   .picker{padding:24px 18px}
   .github-page nav.pages a:not(.active){display:flex}
   .github-hero{padding-top:48px;padding-bottom:34px}

@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import App from './App'
 import { githubSnapshot } from './data/github'
+import { growthRateLabel } from './components/GitHubRadarPage'
 
 describe('App', () => {
   afterEach(() => {
@@ -104,5 +105,15 @@ describe('App', () => {
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: candidate.repo } })
     expect(container.querySelectorAll('.candidate-row')).toHaveLength(1)
     expect(container.querySelector('.candidate-row h3')).toHaveTextContent(candidate.repo)
+  })
+
+  it('keeps the GitHub radar entry visible to the mobile navigation', () => {
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: 'GitHub 动态榜' })).toHaveClass('mobile-visible')
+  })
+
+  it('labels growth from a zero baseline as a new project instead of a percentage', () => {
+    expect(growthRateLabel({ stars: 348, weeklyGrowth: 348 })).toBe('新项目')
   })
 })

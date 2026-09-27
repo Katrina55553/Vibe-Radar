@@ -26,8 +26,15 @@ function sortCandidates(items: GitHubCandidate[], sort: SortKey) {
   return [...items].sort((a, b) => {
     if (sort === 'stars') return b.stars - a.stars
     if (sort === 'updated') return Date.parse(b.pushedAt) - Date.parse(a.pushedAt)
-    return b.weeklyGrowth - a.weeklyGrowth
+    return (b.weeklyGrowth ?? -1) - (a.weeklyGrowth ?? -1) || b.stars - a.stars
   })
+}
+
+export function growthRateLabel(item: Pick<GitHubCandidate, 'stars' | 'weeklyGrowth'>) {
+  if (item.weeklyGrowth === null) return '等待基线'
+  const previousStars = item.stars - item.weeklyGrowth
+  if (previousStars <= 0) return '新项目'
+  return `+${(item.weeklyGrowth / previousStars * 100).toFixed(1)}%`
 }
 
 export function GitHubRadarPage() {
@@ -47,8 +54,10 @@ export function GitHubRadarPage() {
   }, [language, query, sort])
 
   const totalStars = githubSnapshot.candidates.reduce((sum, item) => sum + item.stars, 0)
-  const totalGrowth = githubSnapshot.candidates.reduce((sum, item) => sum + item.weeklyGrowth, 0)
-  const hottestRepo = sortCandidates(githubSnapshot.candidates, 'growth')[0]?.repo ?? '—'
+  const knownGrowth = githubSnapshot.candidates.filter((item) => item.weeklyGrowth !== null)
+  const totalGrowth = knownGrowth.reduce((sum, item) => sum + (item.weeklyGrowth ?? 0), 0)
+  const hottestRepo = sortCandidates(knownGrowth, 'growth')[0]?.repo ?? '—'
+  const hasBaseline = githubSnapshot.previousSnapshotAt !== null
 
   return (
     <div className="github-page">
@@ -81,10 +90,12 @@ export function GitHubRadarPage() {
             <div className="signal-grid">
               <div><span>候选项目</span><strong>{githubSnapshot.candidates.length}</strong></div>
               <div><span>累计 Stars</span><strong>{number.format(totalStars)}</strong></div>
-              <div><span>本周增长</span><strong className="growth">+{number.format(totalGrowth)}</strong></div>
+              <div><span>本周增长</span><strong className="growth">{hasBaseline ? `+${number.format(totalGrowth)}` : '等待基线'}</strong></div>
               <div><span>最热项目</span><strong className="repo-stat">{hottestRepo}</strong></div>
             </div>
-            <p>增长值来自当前快照与 {formatDate(githubSnapshot.previousSnapshotAt)} 基线的差值。</p>
+            <p>{hasBaseline
+              ? <>增长值来自当前快照与 {formatDate(githubSnapshot.previousSnapshotAt!)} 基线的差值。</>
+              : '尚无 5–9 天前的有效快照；增长指标会在采样窗口就绪后自动显示。'}</p>
           </aside>
         </section>
 
@@ -118,7 +129,6 @@ export function GitHubRadarPage() {
 
           <div className="candidate-list">
             {candidates.map((item, index) => {
-              const growthRate = item.weeklyGrowth / Math.max(1, item.stars - item.weeklyGrowth) * 100
               return (
                 <article className="candidate-row" key={item.repo}>
                   <div className="candidate-rank"><span>RANK</span><strong>{String(index + 1).padStart(2, '0')}</strong></div>
@@ -136,7 +146,7 @@ export function GitHubRadarPage() {
                   </div>
                   <div className="candidate-metrics">
                     <div><span>累计 STAR</span><strong>★ {number.format(item.stars)}</strong></div>
-                    <div><span>本周增长</span><strong className="growth">+{number.format(item.weeklyGrowth)}</strong><small>+{growthRate.toFixed(1)}%</small></div>
+                    <div><span>本周增长</span><strong className="growth">{item.weeklyGrowth === null ? '—' : `+${number.format(item.weeklyGrowth)}`}</strong><small>{growthRateLabel(item)}</small></div>
                     <div><span>活跃状态</span><strong className="activity">{relativeDate(item.pushedAt)}</strong><small>{formatDate(item.pushedAt)}</small></div>
                   </div>
                   <a className="repo-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`打开 ${item.repo}`}>↗</a>

@@ -4,7 +4,7 @@ export interface GitHubCandidate {
   repo: string
   url: string
   stars: number
-  weeklyGrowth: number
+  weeklyGrowth: number | null
   description: string
   topics: string[]
   language: string
@@ -14,7 +14,7 @@ export interface GitHubCandidate {
 
 export interface GitHubSnapshot {
   generatedAt: string
-  previousSnapshotAt: string
+  previousSnapshotAt: string | null
   candidates: GitHubCandidate[]
 }
 

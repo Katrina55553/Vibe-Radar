@@ -1,6 +1,7 @@
 export const githubRadarConfig = {
   lookbackDays: 14,
   growthWindowDays: 7,
+  baselineToleranceDays: 2,
   minStars: 25,
   maxCandidates: 24,
   maxHistorySnapshots: 12,

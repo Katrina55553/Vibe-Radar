@@ -2,6 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { githubRadarConfig as config } from './github-radar.config.mjs'
+import { chooseBaseline, refreshPreviousCandidates, toCandidate } from './github-radar-core.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const snapshotPath = path.join(root, 'src', 'data', 'github.snapshot.json')
@@ -42,7 +43,9 @@ async function github(endpoint, attempt = 1) {
 
   const remaining = response.headers.get('x-ratelimit-remaining')
   const reset = response.headers.get('x-ratelimit-reset')
-  throw new Error(`GitHub API ${response.status}: ${body.slice(0, 300)} (remaining=${remaining}, reset=${reset})`)
+  const error = new Error(`GitHub API ${response.status}: ${body.slice(0, 300)} (remaining=${remaining}, reset=${reset})`)
+  error.status = response.status
+  throw error
 }
 
 async function searchRepositories(query) {
@@ -54,34 +57,6 @@ async function searchRepositories(query) {
   })
   const result = await github(`/search/repositories?${params}`)
   return result.items ?? []
-}
-
-function chooseBaseline(history) {
-  const target = now.getTime() - config.growthWindowDays * day
-  const snapshots = history.snapshots
-    .filter((item) => Date.parse(item.generatedAt) <= now.getTime())
-    .sort((a, b) => Math.abs(Date.parse(a.generatedAt) - target) - Math.abs(Date.parse(b.generatedAt) - target))
-  return snapshots[0]
-}
-
-function toCandidate(repository, baseline) {
-  const previousStars = baseline?.stars[repository.full_name]
-  const createdDuringWindow = baseline && Date.parse(repository.created_at) >= Date.parse(baseline.generatedAt)
-  const weeklyGrowth = previousStars === undefined
-    ? createdDuringWindow ? repository.stargazers_count : 0
-    : Math.max(0, repository.stargazers_count - previousStars)
-
-  return {
-    repo: repository.full_name,
-    url: repository.html_url,
-    stars: repository.stargazers_count,
-    weeklyGrowth,
-    description: repository.description || 'GitHub 暂未提供项目描述。',
-    topics: (repository.topics ?? []).slice(0, 12),
-    language: repository.language || 'Other',
-    updatedAt: repository.updated_at,
-    pushedAt: repository.pushed_at,
-  }
 }
 
 function upsertHistory(history, repositories) {
@@ -110,14 +85,7 @@ async function main() {
     for (const repository of results) repositories.set(repository.full_name, repository)
   }
 
-  for (const candidate of previousSnapshot.candidates) {
-    try {
-      const repository = await github(`/repos/${candidate.repo}`)
-      repositories.set(repository.full_name, repository)
-    } catch (error) {
-      console.warn(`Keeping stale data for ${candidate.repo}: ${error.message}`)
-    }
-  }
+  await refreshPreviousCandidates(previousSnapshot, repositories, github)
 
   const activeAfter = now.getTime() - 180 * day
   const eligible = [...repositories.values()].filter((repository) =>
@@ -128,17 +96,17 @@ async function main() {
     && Date.parse(repository.pushed_at) >= activeAfter
     && repository.description,
   )
-  const baseline = chooseBaseline(history)
+  const baseline = chooseBaseline(history, now, config.growthWindowDays, config.baselineToleranceDays)
   const candidates = eligible
     .map((repository) => toCandidate(repository, baseline))
-    .sort((a, b) => b.weeklyGrowth - a.weeklyGrowth || b.stars - a.stars)
+    .sort((a, b) => (b.weeklyGrowth ?? -1) - (a.weeklyGrowth ?? -1) || b.stars - a.stars)
     .slice(0, config.maxCandidates)
 
   if (candidates.length === 0) throw new Error('GitHub search returned no eligible candidates; refusing to replace the current snapshot.')
 
   const nextSnapshot = {
     generatedAt: nowIso,
-    previousSnapshotAt: baseline?.generatedAt ?? nowIso,
+    previousSnapshotAt: baseline?.generatedAt ?? null,
     candidates,
   }
   const nextHistory = upsertHistory(history, eligible)
@@ -149,7 +117,7 @@ async function main() {
     rank: index + 1,
     repo: item.repo,
     stars: item.stars,
-    growth: item.weeklyGrowth,
+    growth: item.weeklyGrowth ?? 'unknown',
   })))
 
   if (dryRun) {

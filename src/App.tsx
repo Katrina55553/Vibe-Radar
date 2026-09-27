@@ -68,7 +68,7 @@ function ProjectRadarApp() {
   return (
     <>
       <a className="skip" href="#board">跳到榜单</a>
-      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#stars">明星项目</a><a href="#picker">帮我选</a><a href="?view=github">GitHub 动态榜</a></nav></div></header>
+      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#stars">明星项目</a><a href="#picker">帮我选</a><a className="mobile-visible" href="?view=github">GitHub 动态榜</a></nav></div></header>
 
       <main id="top">
         <div className="wrap hero">

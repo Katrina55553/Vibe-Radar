@@ -26,7 +26,7 @@ npm run update:github:dry
 npm run update:github
 ```
 
-`.github/workflows/update-github-radar.yml` 会在每周五 08:07（Asia/Shanghai）抓取新候选，计算与约 7 天前快照的 Star 增长，验证项目后自动提交数据文件。也可以在 GitHub Actions 页面手动运行。
+`.github/workflows/update-github-radar.yml` 会在每周五 08:07（Asia/Shanghai）抓取新候选，使用 5–9 天前的快照计算约 7 日 Star 增长，验证项目后自动提交数据文件。缺少有效基线的项目会显示“等待基线”，不会以零增长参与排序。也可以在 GitHub Actions 页面手动运行。
 
 ## 目录
 
