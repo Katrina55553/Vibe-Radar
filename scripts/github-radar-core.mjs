@@ -1,24 +1,18 @@
-const day = 86_400_000
+export function parseGitHubTrending(html) {
+  if (typeof html !== 'string') throw new TypeError('GitHub Trending response must be HTML.')
 
-export function chooseBaseline(history, now, growthWindowDays, toleranceDays = 2) {
-  const target = now.getTime() - growthWindowDays * day
-  const snapshots = history.snapshots
-    .filter((item) => {
-      const age = now.getTime() - Date.parse(item.generatedAt)
-      return age >= (growthWindowDays - toleranceDays) * day
-        && age <= (growthWindowDays + toleranceDays) * day
-    })
-    .sort((a, b) => Math.abs(Date.parse(a.generatedAt) - target) - Math.abs(Date.parse(b.generatedAt) - target))
-  return snapshots[0]
+  const articles = html.match(/<article\b[\s\S]*?<\/article>/gi) ?? []
+  return articles.flatMap((article) => {
+    const repo = article.match(/<h2\b[\s\S]*?<a\b[^>]*href="\/([^"?#]+\/[^"?#]+)"/i)?.[1]
+      ?.replace(/\s+/g, '')
+    const growth = article.match(/([\d,]+)\s+stars?\s+this\s+week/i)?.[1]
+    const weeklyGrowth = Number(growth?.replaceAll(',', ''))
+    if (!repo || !Number.isSafeInteger(weeklyGrowth) || weeklyGrowth <= 0) return []
+    return [{ repo, weeklyGrowth }]
+  })
 }
 
-export function toCandidate(repository, baseline) {
-  const previousStars = baseline?.stars[repository.full_name]
-  const createdDuringWindow = baseline && Date.parse(repository.created_at) >= Date.parse(baseline.generatedAt)
-  const weeklyGrowth = previousStars === undefined
-    ? createdDuringWindow ? repository.stargazers_count : null
-    : Math.max(0, repository.stargazers_count - previousStars)
-
+export function toTrendingCandidate(repository, weeklyGrowth) {
   return {
     repo: repository.full_name,
     url: repository.html_url,
@@ -32,39 +26,9 @@ export function toCandidate(repository, baseline) {
   }
 }
 
-function repositoryFromCandidate(candidate) {
-  return {
-    full_name: candidate.repo,
-    html_url: candidate.url,
-    stargazers_count: candidate.stars,
-    // The snapshot does not retain repository creation time. Use an old date so
-    // missing baseline data stays "unknown" instead of looking like new growth.
-    created_at: '1970-01-01T00:00:00.000Z',
-    description: candidate.description,
-    topics: candidate.topics,
-    language: candidate.language,
-    updated_at: candidate.updatedAt,
-    pushed_at: candidate.pushedAt,
-    archived: false,
-    disabled: false,
-    fork: false,
-  }
-}
-
-export async function refreshPreviousCandidates(previousSnapshot, repositories, github, logger = console) {
-  for (const candidate of previousSnapshot.candidates) {
-    try {
-      const repository = await github(`/repos/${candidate.repo}`)
-      repositories.set(repository.full_name, repository)
-    } catch (error) {
-      if (error?.status === 404) {
-        logger.warn(`Dropping unavailable repository ${candidate.repo}`)
-        continue
-      }
-      if (!repositories.has(candidate.repo)) {
-        repositories.set(candidate.repo, repositoryFromCandidate(candidate))
-      }
-      logger.warn(`Using last known data for ${candidate.repo}: ${error.message}`)
-    }
-  }
+export function isTrendingEligible(repository) {
+  return Boolean(repository
+    && !repository.archived
+    && !repository.disabled
+    && !repository.fork)
 }

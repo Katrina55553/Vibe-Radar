@@ -18,21 +18,23 @@ npm run build
 
 ## GitHub 动态榜数据
 
-```bash
-# 只预览抓取结果，不改文件
-npm run update:github:dry
+榜单直接抓取 GitHub Trending 周榜页面，使用页面中的 `stars this week` 作为 7 日新增 Star。再通过 GitHub API 补全项目信息、过滤 fork/归档/失效仓库，最终发布前 24 个。
 
-# 更新快照与历史数据
+`.github/workflows/update-github-radar.yml` 会在每周五 08:07（Asia/Shanghai）更新榜单。不需要 Google Cloud、Apify 账号或额外 Secret。
+
+本地可直接运行：
+
+```bash
 npm run update:github
 ```
 
-`.github/workflows/update-github-radar.yml` 会在每周五 08:07（Asia/Shanghai）抓取新候选，使用 5–9 天前的快照计算约 7 日 Star 增长，验证项目后自动提交数据文件。缺少有效基线的项目会显示“等待基线”，不会以零增长参与排序。也可以在 GitHub Actions 页面手动运行。
+`npm run update:github:dry` 会完成同样的数据校验，但不改写快照文件。
 
 ## 目录
 
 - `src/components`：页面与交互组件
 - `src/data`：项目榜、明星项目和筛选选项
-- `scripts`：GitHub 候选发现、快照与增长计算
+- `scripts`：GitHub Trending 抓取、仓库信息补全与数据校验
 - `src/domain`：分类、评分、搜索和推荐规则
 - `src/hooks`：浏览器持久化 Hook
 - `src/styles`：全局视觉样式

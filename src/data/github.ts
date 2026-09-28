@@ -14,7 +14,8 @@ export interface GitHubCandidate {
 
 export interface GitHubSnapshot {
   generatedAt: string
-  previousSnapshotAt: string | null
+  periodStart?: string
+  source?: string
   candidates: GitHubCandidate[]
 }
 

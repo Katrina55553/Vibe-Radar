@@ -1,23 +1,18 @@
-import { readFile, writeFile } from 'node:fs/promises'
+import { writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { githubRadarConfig as config } from './github-radar.config.mjs'
-import { chooseBaseline, refreshPreviousCandidates, toCandidate } from './github-radar-core.mjs'
+import { isTrendingEligible, parseGitHubTrending, toTrendingCandidate } from './github-radar-core.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const snapshotPath = path.join(root, 'src', 'data', 'github.snapshot.json')
-const historyPath = path.join(root, 'src', 'data', 'github.history.json')
 const dryRun = process.argv.includes('--dry-run')
 const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN
 
 const day = 86_400_000
 const now = new Date()
 const nowIso = now.toISOString()
-const createdAfter = new Date(now.getTime() - config.lookbackDays * day).toISOString().slice(0, 10)
-
-async function readJson(file) {
-  return JSON.parse(await readFile(file, 'utf8'))
-}
+const periodStart = new Date(now.getTime() - config.growthWindowDays * day).toISOString()
 
 function sleep(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds))
@@ -48,76 +43,57 @@ async function github(endpoint, attempt = 1) {
   throw error
 }
 
-async function searchRepositories(query) {
-  const params = new URLSearchParams({
-    q: query,
-    sort: 'stars',
-    order: 'desc',
-    per_page: '50',
+async function fetchTrending(attempt = 1) {
+  const response = await fetch('https://github.com/trending?since=weekly', {
+    headers: {
+      Accept: 'text/html',
+      'User-Agent': 'vibe-coding-radar',
+    },
   })
-  const result = await github(`/search/repositories?${params}`)
-  return result.items ?? []
-}
+  if (response.ok) return response.text()
 
-function upsertHistory(history, repositories) {
-  const stars = Object.fromEntries(repositories.map((repository) => [repository.full_name, repository.stargazers_count]))
-  const today = nowIso.slice(0, 10)
-  const snapshots = history.snapshots.filter((item) => item.generatedAt.slice(0, 10) !== today)
-  snapshots.push({ generatedAt: nowIso, stars })
-  snapshots.sort((a, b) => Date.parse(a.generatedAt) - Date.parse(b.generatedAt))
-  return { snapshots: snapshots.slice(-config.maxHistorySnapshots) }
+  if ((response.status === 429 || response.status >= 500) && attempt < 4) {
+    const retryAfter = Number(response.headers.get('retry-after')) || attempt * 5
+    console.warn(`GitHub Trending ${response.status}; retrying in ${retryAfter}s`)
+    await sleep(Math.min(retryAfter, 60) * 1000)
+    return fetchTrending(attempt + 1)
+  }
+
+  throw new Error(`GitHub Trending returned ${response.status}.`)
 }
 
 async function main() {
-  const [previousSnapshot, history] = await Promise.all([
-    readJson(snapshotPath),
-    readJson(historyPath),
-  ])
-  const repositories = new Map()
+  const ranking = parseGitHubTrending(await fetchTrending())
+  if (ranking.length < config.minCandidates) throw new Error(`GitHub Trending returned only ${ranking.length} valid repositories; refusing to publish an incomplete ranking.`)
 
-  const queries = [
-    `created:>=${createdAfter} stars:>=100 archived:false fork:false`,
-    ...config.searchTopics.map((topic) => `created:>=${createdAfter} stars:>=${config.minStars} archived:false fork:false topic:${topic}`),
-  ]
-
-  for (const query of queries) {
-    const results = await searchRepositories(query)
-    for (const repository of results) repositories.set(repository.full_name, repository)
+  const candidates = []
+  for (const item of ranking) {
+    try {
+      const repository = await github(`/repos/${item.repo}`)
+      if (isTrendingEligible(repository)) candidates.push(toTrendingCandidate(repository, item.weeklyGrowth))
+    } catch (error) {
+      if (error?.status !== 404) throw error
+      console.warn(`Dropping unavailable repository ${item.repo}`)
+    }
+    if (candidates.length === config.maxCandidates) break
   }
 
-  await refreshPreviousCandidates(previousSnapshot, repositories, github)
-
-  const activeAfter = now.getTime() - 180 * day
-  const eligible = [...repositories.values()].filter((repository) =>
-    !repository.archived
-    && !repository.disabled
-    && !repository.fork
-    && repository.stargazers_count >= config.minStars
-    && Date.parse(repository.pushed_at) >= activeAfter
-    && repository.description,
-  )
-  const baseline = chooseBaseline(history, now, config.growthWindowDays, config.baselineToleranceDays)
-  const candidates = eligible
-    .map((repository) => toCandidate(repository, baseline))
-    .sort((a, b) => (b.weeklyGrowth ?? -1) - (a.weeklyGrowth ?? -1) || b.stars - a.stars)
-    .slice(0, config.maxCandidates)
-
-  if (candidates.length === 0) throw new Error('GitHub search returned no eligible candidates; refusing to replace the current snapshot.')
+  if (candidates.length < config.minCandidates) throw new Error(`Only ${candidates.length} eligible repositories remained; refusing to publish an incomplete ranking.`)
 
   const nextSnapshot = {
     generatedAt: nowIso,
-    previousSnapshotAt: baseline?.generatedAt ?? null,
-    candidates,
+    periodStart,
+    source: 'github-trending-weekly',
+    candidates: candidates.slice(0, config.maxCandidates),
   }
-  const nextHistory = upsertHistory(history, eligible)
 
-  console.log(`Discovered ${repositories.size} repositories; publishing ${candidates.length} candidates.`)
-  console.log(`Growth baseline: ${nextSnapshot.previousSnapshotAt}`)
-  console.table(candidates.slice(0, 10).map((item, index) => ({
+  console.log(`Loaded ${ranking.length} GitHub Trending repositories; publishing ${nextSnapshot.candidates.length} candidates.`)
+  console.log(`Ranking window: ${periodStart} → ${nowIso}`)
+  console.table(nextSnapshot.candidates.slice(0, 10).map((item, index) => ({
     rank: index + 1,
     repo: item.repo,
     stars: item.stars,
-    growth: item.weeklyGrowth ?? 'unknown',
+    sevenDayStars: item.weeklyGrowth,
   })))
 
   if (dryRun) {
@@ -125,10 +101,7 @@ async function main() {
     return
   }
 
-  await Promise.all([
-    writeFile(snapshotPath, `${JSON.stringify(nextSnapshot, null, 2)}\n`),
-    writeFile(historyPath, `${JSON.stringify(nextHistory, null, 2)}\n`),
-  ])
+  await writeFile(snapshotPath, `${JSON.stringify(nextSnapshot, null, 2)}\n`)
 }
 
 main().catch((error) => {

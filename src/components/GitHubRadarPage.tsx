@@ -54,7 +54,7 @@ function sortCandidates(items: GitHubCandidate[], sort: SortKey) {
 }
 
 export function growthRateLabel(item: Pick<GitHubCandidate, 'stars' | 'weeklyGrowth'>) {
-  if (item.weeklyGrowth === null) return '等待基线'
+  if (item.weeklyGrowth === null) return '—'
   const previousStars = item.stars - item.weeklyGrowth
   if (previousStars <= 0) return '新项目'
   return `+${(item.weeklyGrowth / previousStars * 100).toFixed(1)}%`
@@ -76,12 +76,7 @@ export function GitHubRadarPage() {
     })
     return sortCandidates(filtered, sort)
   }, [language, query, sort])
-
-  const totalStars = githubSnapshot.candidates.reduce((sum, item) => sum + item.stars, 0)
-  const knownGrowth = githubSnapshot.candidates.filter((item) => item.weeklyGrowth !== null)
-  const totalGrowth = knownGrowth.reduce((sum, item) => sum + (item.weeklyGrowth ?? 0), 0)
-  const hottestRepo = sortCandidates(knownGrowth, 'growth')[0]?.repo ?? '—'
-  const hasBaseline = githubSnapshot.previousSnapshotAt !== null
+  const hasWeeklyRanking = githubSnapshot.source === 'github-trending-weekly'
 
   async function copyStartCommand(item: GitHubCandidate) {
     try {
@@ -108,28 +103,19 @@ export function GitHubRadarPage() {
       <main>
         <section className="github-hero wrap">
           <div className="github-title">
-            <p className="eyebrow mono">Live repository signals · snapshot based</p>
-            <h1>GitHub<br /><span className="radar">动态榜</span></h1>
-            <p className="lede">从仓库公开数据中捕捉正在上升的新项目。累计 Star、增长、描述、Topics、语言与活跃时间来自同一份可自动替换的数据快照。</p>
-            <div className="sync-line">
-              <span className="sync-dot" />
-              <strong>数据快照已就绪</strong>
-              <span>{formatDate(githubSnapshot.generatedAt)}</span>
+            <p className="eyebrow mono">GitHub Trending · this week</p>
+            <div className="github-title-row">
+              <h1>GitHub <span className="radar">动态榜</span></h1>
+              <div className="github-intro">
+                <p className="lede">根据 GitHub Trending 周榜与页面公开的本周新增 Star，发现当下最受关注的开源项目。项目描述、Topics、语言与活跃时间来自 GitHub 公开数据。</p>
+                <div className="sync-line">
+                  <span className="sync-dot" />
+                  <strong>{hasWeeklyRanking ? '7 日热度数据已就绪' : '仓库数据已就绪'}</strong>
+                  <span>{formatDate(githubSnapshot.generatedAt)}</span>
+                </div>
+              </div>
             </div>
           </div>
-
-          <aside className="signal-panel" aria-label="GitHub 数据概览">
-            <div className="signal-head"><span className="mono">Signal overview</span><span className="live-pill">LIVE DATA</span></div>
-            <div className="signal-grid">
-              <div><span>候选项目</span><strong>{githubSnapshot.candidates.length}</strong></div>
-              <div><span>累计 Stars</span><strong>{number.format(totalStars)}</strong></div>
-              <div><span>本周增长</span><strong className="growth">{hasBaseline ? `+${number.format(totalGrowth)}` : '等待基线'}</strong></div>
-              <div><span>最热项目</span><strong className="repo-stat">{hottestRepo}</strong></div>
-            </div>
-            <p>{hasBaseline
-              ? <>增长值来自当前快照与 {formatDate(githubSnapshot.previousSnapshotAt!)} 基线的差值。</>
-              : '尚无 5–9 天前的有效快照；增长指标会在采样窗口就绪后自动显示。'}</p>
-          </aside>
         </section>
 
         <section className="github-board wrap" id="candidate-list">
@@ -137,14 +123,14 @@ export function GitHubRadarPage() {
             <div>
               <p className="mono">Candidate queue</p>
               <h2>新项目候选</h2>
-              <p>当前显示 {candidates.length} 个项目，名次会随排序规则自动重排。</p>
+              <p>当前显示 {candidates.length} 个项目，默认按过去 7 天新增 Star 排名。</p>
             </div>
             <div className="snapshot-stamp"><span>LAST SYNC</span><b>{formatDate(githubSnapshot.generatedAt)}</b></div>
           </div>
 
           <div className="github-controls">
             <div className="sort-tabs" role="group" aria-label="候选排序">
-              <button className={sort === 'growth' ? 'on' : ''} onClick={() => setSort('growth')}>增长最快</button>
+              <button className={sort === 'growth' ? 'on' : ''} onClick={() => setSort('growth')}>7 日新增</button>
               <button className={sort === 'stars' ? 'on' : ''} onClick={() => setSort('stars')}>Star 最多</button>
               <button className={sort === 'updated' ? 'on' : ''} onClick={() => setSort('updated')}>最近活跃</button>
             </div>
@@ -167,8 +153,8 @@ export function GitHubRadarPage() {
                 <article className="candidate-row" key={item.repo}>
                   <div className="candidate-card-head">
                     <div className="candidate-rank">#{index + 1}</div>
-                    <strong>增长候选 GitHub 项目</strong>
-                    <span className="candidate-signal">{item.weeklyGrowth === null ? '待采样' : `涨 ${number.format(item.weeklyGrowth)}`}</span>
+                    <strong>近 7 天热门 GitHub 项目</strong>
+                    {item.weeklyGrowth !== null && <span className="candidate-signal">+{number.format(item.weeklyGrowth)} Stars</span>}
                     {index < 3 && <span className="candidate-hot">HOT</span>}
                   </div>
 
@@ -205,8 +191,10 @@ export function GitHubRadarPage() {
                   </div>
 
                   <div className="candidate-meta" aria-label="项目数据">
-                    <span>周增长 <b>{item.weeklyGrowth === null ? '等待基线' : `+${number.format(item.weeklyGrowth)}`}</b></span>
-                    <span>增长率 <b>{growthRateLabel(item)}</b></span>
+                    {item.weeklyGrowth !== null && <>
+                      <span>7 日新增 <b>+{number.format(item.weeklyGrowth)}</b></span>
+                      <span>增长率 <b>{growthRateLabel(item)}</b></span>
+                    </>}
                     <span>同步 <b>{formatDate(item.pushedAt)}</b></span>
                   </div>
                 </article>
@@ -218,7 +206,7 @@ export function GitHubRadarPage() {
 
         <section className="pipeline wrap" aria-label="数据更新流程">
           <span className="mono">Update pipeline</span>
-          <div><b>GitHub API</b><i>→</i><b>每周快照</b><i>→</i><b>计算增长</b><i>→</i><b>自动排序</b><i>→</i><b>发布页面</b></div>
+          <div><b>GitHub Trending</b><i>→</i><b>本周新增 Star</b><i>→</i><b>GitHub 资料</b><i>→</i><b>自动排序</b><i>→</i><b>发布页面</b></div>
         </section>
       </main>
 
