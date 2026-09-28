@@ -19,8 +19,11 @@ describe('App', () => {
   it('filters projects and opens and closes project details', () => {
     const { container } = render(<App />)
     expect(screen.getByRole('heading', { name: /Vibe Coding.*雷达/ })).toBeInTheDocument()
+    expect(container.querySelector('.stats .v')).toHaveTextContent('270')
+    expect(container.querySelectorAll('.lane-head em')).toHaveLength(3)
+    for (const range of container.querySelectorAll('.lane-head em')) expect(range).toHaveTextContent('#1 → #90')
 
-    fireEvent.change(screen.getByRole('searchbox'), { target: { value: '流体' } })
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'WebGL 流体玩具' } })
     expect(container.querySelectorAll('#board .card')).toHaveLength(1)
     expect(container.querySelector('#board .card h3')).toHaveTextContent('WebGL 流体玩具')
 

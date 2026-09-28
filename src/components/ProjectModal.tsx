@@ -81,7 +81,7 @@ export function ProjectModal({ project, onClose, onCopyResult }: Props) {
         <div className="plabel mono" style={{ fontSize: 11, letterSpacing: '.12em', color: 'var(--ink-2)' }}>MVP 开工路线</div>
         <div className="steps">{steps.map((step, index) => <div className="step" key={step}><b>0{index + 1}</b><span>{step}</span></div>)}</div>
         <div className="prompt-box"><div className="plabel">开工 PROMPT（复制给 AI 编程助手）</div><pre>{prompt}</pre></div>
-        <div className="mactions"><button className="btn primary" onClick={() => void copyPrompt()}>复制 Prompt</button><a className="btn" href={`https://github.com/search?q=${encodeURIComponent(project.source)}`} target="_blank" rel="noopener noreferrer">看来源 · {project.source} ↗</a></div>
+        <div className="mactions"><button className="btn primary" onClick={() => void copyPrompt()}>复制 Prompt</button><a className="btn" href={project.sourceUrl ?? `https://github.com/search?q=${encodeURIComponent(project.source)}`} target="_blank" rel="noopener noreferrer">看来源 · {project.source} ↗</a></div>
       </div>
     </div>
   )

@@ -8,6 +8,7 @@ export function matchesQuery(project: Project, query: string): boolean {
 }
 
 export function recommendProjects(projects: Project[], picks: PickState, limit = 3): Project[] {
+  const maxRank = Math.max(...projects.map((project) => project.rank))
   const scored = projects
     .map((project) => {
       let score = 0
@@ -15,7 +16,7 @@ export function recommendProjects(projects: Project[], picks: PickState, limit =
       if (project.goal === picks.goal) score += 3
       if (project.time === picks.time) score += 2
       if (project.exp === picks.exp) score += 1
-      score += (31 - project.rank) * 0.06 + Math.min(project.likes, 40) * 0.02
+      score += (maxRank + 1 - project.rank) * 0.02 + Math.min(project.likes, 40) * 0.02
       return { project, score }
     })
     .sort((a, b) => b.score - a.score)

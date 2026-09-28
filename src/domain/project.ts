@@ -11,6 +11,20 @@ export type ProjectGoal = (typeof goals)[number]
 export type ProjectTime = (typeof times)[number]
 export type ProjectExperience = (typeof experiences)[number]
 
+export interface ProjectScores {
+  ease: number
+  wow: number
+  useful: number
+  total: number
+}
+
+export interface ProjectProfile {
+  form?: ProjectForm
+  goal?: ProjectGoal
+  time?: ProjectTime
+  exp?: ProjectExperience
+}
+
 export interface ProjectInput {
   rank: number
   track: Track
@@ -20,6 +34,9 @@ export interface ProjectInput {
   mvp: string
   tags: string[]
   source: string
+  sourceUrl?: string
+  profile?: ProjectProfile
+  scores?: ProjectScores
 }
 
 export interface Project extends ProjectInput {
@@ -86,13 +103,14 @@ function experienceOf(project: ProjectInput): ProjectExperience {
 }
 
 export function enrichProject(input: ProjectInput): Project {
-  const form = formOf(input)
-  const goal = goalOf(input)
-  const time = timeOf(input)
-  const exp = experienceOf(input)
+  const form = input.profile?.form ?? formOf(input)
+  const goal = input.profile?.goal ?? goalOf(input)
+  const time = input.profile?.time ?? timeOf(input)
+  const exp = input.profile?.exp ?? experienceOf(input)
   const key = trackMeta[input.track].key
-  const ease = Math.min(98, Math.round(88 - (input.rank - 1) * 1.1 + Math.min(input.likes, 20) * 0.4 + (exp === '刚开始' ? 6 : 0)))
-  const wow = Math.min(98, Math.round((key === 'play' ? 90 : key === 'use' ? 72 : 80) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.3))
-  const useful = Math.min(98, Math.round((key === 'use' ? 90 : key === 'play' ? 70 : 84) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.25))
-  return { ...input, form, goal, time, exp, ease, wow, useful, total: Math.round((ease + wow + useful) / 3) }
+  const ease = input.scores?.ease ?? Math.min(98, Math.round(88 - (input.rank - 1) * 1.1 + Math.min(input.likes, 20) * 0.4 + (exp === '刚开始' ? 6 : 0)))
+  const wow = input.scores?.wow ?? Math.min(98, Math.round((key === 'play' ? 90 : key === 'use' ? 72 : 80) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.3))
+  const useful = input.scores?.useful ?? Math.min(98, Math.round((key === 'use' ? 90 : key === 'play' ? 70 : 84) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.25))
+  const total = input.scores?.total ?? Math.round((ease + wow + useful) / 3)
+  return { ...input, form, goal, time, exp, ease, wow, useful, total }
 }

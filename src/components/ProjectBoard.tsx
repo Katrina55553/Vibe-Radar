@@ -41,9 +41,10 @@ export function ProjectBoard(props: Props) {
         {props.tab === 'star' ? <div style={{ gridColumn: '1/-1' }}>{visibleStars.length > 0 ? <StarGrid stars={visibleStars} /> : <p className="empty">没有匹配的项目</p>}</div> : lanes.map((lane) => {
           const meta = trackMeta[lane]
           const projects = props.projects.filter((project) => project.track === lane && matchesQuery(project, props.query))
+          const maxRank = Math.max(...props.projects.filter((project) => project.track === lane).map((project) => project.rank))
           return (
             <div className={`lane${lanes.length === 1 ? ' solo' : ''}`} key={lane}>
-              <div className={`lane-head ${meta.key}`}><span className="mono">{meta.label}</span><strong>{lane}</strong><em>#1 → #30</em></div>
+              <div className={`lane-head ${meta.key}`}><span className="mono">{meta.label}</span><strong>{lane}</strong><em>#1 → #{maxRank}</em></div>
               <div className="cards">
                 {projects.length === 0 ? <p className="empty">没有匹配的项目</p> : projects.map((project) => {
                   const id = projectId(project)
@@ -54,7 +55,7 @@ export function ProjectBoard(props: Props) {
                       <h3>{project.title}</h3><p className="desc">{project.desc}</p>
                       <div className="tags">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
                       <p className="mvp">{project.mvp}</p>
-                      <div className="foot"><button className="go" onClick={() => props.onOpen(project)}>一键开工 · 体检+Prompt</button><a className="src" href={`https://github.com/search?q=${encodeURIComponent(project.source)}`} target="_blank" rel="noopener noreferrer">看来源 · {project.source} ↗</a></div>
+                      <div className="foot"><button className="go" onClick={() => props.onOpen(project)}>一键开工 · 体检+Prompt</button><a className="src" href={project.sourceUrl ?? `https://github.com/search?q=${encodeURIComponent(project.source)}`} target="_blank" rel="noopener noreferrer">看来源 · {project.source} ↗</a></div>
                     </article>
                   )
                 })}

@@ -73,14 +73,14 @@ function ProjectRadarApp() {
       <main id="top">
         <div className="wrap hero">
           <div>
-            <p className="eyebrow mono">Beginner-friendly project board · 更新 2026/09/26</p>
+            <p className="eyebrow mono">Beginner-friendly project board · 更新 2026/09/28</p>
             <h1>Vibe Coding<br /><span className="radar">雷达</span></h1>
-            <p className="lede">给刚开始 Coding 的新手，把<b>好玩、好用、好搓（硬件）</b>三条路线整理成一张 90 项可分享榜单：每个项目都有 MVP、体验标签、参考来源和三维评分。现在还能按时间、目标和经验生成适合你的开工清单。</p>
+            <p className="lede">给刚开始 Coding 的新手，把<b>好玩、好用、好搓（硬件）</b>三条路线整理成一张 270 项可分享榜单：每个项目都有 MVP、体验标签、参考来源和三维评分。现在还能按时间、目标和经验生成适合你的开工清单。</p>
             <div className="update-note"><strong>每周五 08:00 更新</strong><span>新星项目与常青项目库同步核验</span></div>
             <div className="cta-row"><a className="btn primary" href="#picker">帮我选项目 ↓</a><a className="btn" href="#board">直接看榜单</a></div>
           </div>
           <aside className="stats" aria-label="榜单概览"><h3 className="mono">Selection Overview</h3><div className="grid">
-            <div className="stat"><div className="k">SELECTION INDEX</div><div className="v">90</div></div><div className="stat"><div className="k">TRACKS</div><div className="v">3<em>+1</em></div></div><div className="stat"><div className="k">TOP SCORE</div><div className="v"><em>98</em></div></div><div className="stat"><div className="k">MVP SPAN</div><div className="v">1-7d</div></div><div className="stat"><div className="k">RISING</div><div className="v">10</div></div><div className="stat"><div className="k">LIKED</div><div className="v">{totalLikes}</div></div>
+            <div className="stat"><div className="k">SELECTION INDEX</div><div className="v">{projects.length}</div></div><div className="stat"><div className="k">TRACKS</div><div className="v">3<em>+1</em></div></div><div className="stat"><div className="k">TOP SCORE</div><div className="v"><em>98</em></div></div><div className="stat"><div className="k">MVP SPAN</div><div className="v">1-14d</div></div><div className="stat"><div className="k">RISING</div><div className="v">10</div></div><div className="stat"><div className="k">LIKED</div><div className="v">{totalLikes}</div></div>
           </div></aside>
         </div>
 
