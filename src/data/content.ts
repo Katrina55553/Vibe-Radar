@@ -1,29 +1,5 @@
 import type { PickState, ProjectExperience, ProjectForm, ProjectGoal, ProjectTime } from '../domain/project'
 
-export interface StarProject {
-  rank: number
-  name: string
-  stars: string
-  desc: string
-  tags: string[]
-}
-
-export const stars: StarProject[] = [
-  { rank: 1, name: 'NandhaKishorM/laya', stars: '23,857', desc: '用本地小模型对文字做选择、打分和是非判断，而不是生成长回答。', tags: ['本周新建累计 23,857', '前沿增长', '效果直观'] },
-  { rank: 2, name: 'zai-org/ZCode', stars: '6,743', desc: 'Z.ai 开源的桌面 AI 编程工具，可在自己的项目里试写代码。', tags: ['本周新建累计 6,743', '前沿增长', '效果直观'] },
-  { rank: 3, name: 'jev-chat/jev-chat-jarvis', stars: '6,432', desc: '在聊天窗口旁给出回复建议，由你决定是否填入和发送。', tags: ['本周新建累计 6,432', '前沿增长', '进阶挑战'] },
-  { rank: 4, name: 'unreallabsai/unreal-agent', stars: '1,897', desc: '异步执行工具调用的 Agent 框架，适合学习任务协调机制。', tags: ['AI 应用编排', '工具调用', '可发布应用'] },
-  { rank: 5, name: 'bespokelabsai/nimble', stars: '1,762', desc: '本地结构化决策模型与训练配方，适合做分类和选择任务。', tags: ['本周新建累计 1,762', '前沿增长', '进阶挑战'] },
-  { rank: 6, name: 'driceroland/Search', stars: '1,330', desc: '使用系统 WebKit 的轻量 Mac 浏览器，提供独立下载和安装入口。', tags: ['本周新建累计 1,330', '前沿增长'] },
-]
-
-export const references = [
-  'GitHub · creative-coding topic', 'GitHub · game-development topic', 'GitHub · WebGL topic',
-  'GitHub · Canvas topic', 'GitHub · Web Audio topic', 'GitHub · self-hosted topic', 'GitHub · AI agents topic',
-  'GitHub · RAG topic', 'GitHub · ESP32 topic', 'GitHub · Raspberry Pi topic', 'GitHub · home-automation topic',
-  'GitHub · 3D printing topic', 'GitHub · Home Assistant topic', 'Awesome · self-hosted list', 'GitHub · Trending weekly',
-]
-
 interface PickGroup<T extends string> {
   label: string
   options: readonly T[]

@@ -45,16 +45,6 @@ describe('App', () => {
     expect(button).toHaveTextContent('83')
   })
 
-  it('filters the star tab with the visible search field', () => {
-    const { container } = render(<App />)
-
-    fireEvent.click(screen.getByRole('tab', { name: '明星项目' }))
-    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'laya' } })
-
-    expect(container.querySelectorAll('#board .star-card')).toHaveLength(1)
-    expect(container.querySelector('#board .star-card h3')).toHaveTextContent('NandhaKishorM/laya')
-  })
-
   it('keeps rendering when local storage writes are blocked', () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new DOMException('Storage blocked', 'SecurityError')

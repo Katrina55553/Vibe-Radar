@@ -2,15 +2,14 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ProjectBoard, type BoardTab } from './components/ProjectBoard'
 import { ProjectModal } from './components/ProjectModal'
 import { ProjectPicker } from './components/ProjectPicker'
-import { StarGrid } from './components/StarGrid'
 import { GitHubRadarPage } from './components/GitHubRadarPage'
-import { defaultPicks, references, stars } from './data/content'
+import { defaultPicks } from './data/content'
 import { projectInputs } from './data/projects'
 import { enrichProject, type Project } from './domain/project'
 import { useLocalStorage } from './hooks/useLocalStorage'
 
 const projects = projectInputs.map(enrichProject)
-const validTabs = new Set<BoardTab>(['all', 'play', 'use', 'make', 'star'])
+const validTabs = new Set<BoardTab>(['all', 'play', 'use', 'make'])
 
 function initialTab(): BoardTab {
   const tab = new URLSearchParams(location.search).get('tab') as BoardTab | null
@@ -68,7 +67,7 @@ function ProjectRadarApp() {
   return (
     <>
       <a className="skip" href="#board">跳到榜单</a>
-      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#stars">明星项目</a><a href="#picker">帮我选</a><a className="mobile-visible" href="?view=github">GitHub 动态榜</a></nav></div></header>
+      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#picker">帮我选</a><a className="mobile-visible" href="?view=github">GitHub 动态榜</a></nav></div></header>
 
       <main id="top">
         <div className="wrap hero">
@@ -84,10 +83,8 @@ function ProjectRadarApp() {
           </div></aside>
         </div>
 
-        <section className="block wrap" id="stars"><div className="sec-head"><span className="mono">Rising this week</span><h2>明星项目</h2></div><p className="sec-sub">本周增长最快的 GitHub 项目，来自 GitHub Trending weekly 候选池，并按核验时累计 stars 重新排序。</p><StarGrid stars={stars} /></section>
         <ProjectPicker projects={projects} picks={picks} onChange={setPicks} onOpen={setSelectedProject} />
         <ProjectBoard projects={projects} tab={tab} query={query} likedIds={likedIds} onTabChange={changeTab} onQueryChange={setQuery} onToggleLike={toggleLike} onOpen={setSelectedProject} />
-        <section className="block wrap"><div className="sec-head"><span className="mono">Reference</span><h2>发现渠道</h2></div><div className="refs">{references.map((reference) => { const search = reference.replace(/^GitHub · |^Awesome · /, '').replace(/ topic$/, ''); return <a href={`https://github.com/search?q=${encodeURIComponent(search)}`} target="_blank" rel="noopener noreferrer" key={reference}>{reference}</a> })}</div></section>
       </main>
 
       <footer className="site"><div className="wrap"><button className="footer-link" onClick={() => setWeeklyVisible(true)}>更新日志</button><span>每周五 08:00 定时刷新</span><span className="brand">Vibe Coding 雷达</span></div></footer>

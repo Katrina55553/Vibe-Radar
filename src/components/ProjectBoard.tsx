@@ -1,10 +1,8 @@
 import { useMemo } from 'react'
-import { stars } from '../data/content'
 import { matchesQuery } from '../domain/recommendation'
 import { tracks, trackMeta, type Project, type TrackKey } from '../domain/project'
-import { StarGrid } from './StarGrid'
 
-export type BoardTab = 'all' | TrackKey | 'star'
+export type BoardTab = 'all' | TrackKey
 
 interface Props {
   projects: Project[]
@@ -17,16 +15,11 @@ interface Props {
   onOpen: (project: Project) => void
 }
 
-const tabs: Array<[BoardTab, string]> = [['all', '全部'], ['play', '好玩'], ['use', '好用'], ['make', '好搓（硬件）'], ['star', '明星项目']]
+const tabs: Array<[BoardTab, string]> = [['all', '全部'], ['play', '好玩'], ['use', '好用'], ['make', '好搓（硬件）']]
 const projectId = (project: Project) => `${project.track}#${project.rank}`
 
 export function ProjectBoard(props: Props) {
   const lanes = useMemo(() => tracks.filter((track) => props.tab === 'all' || trackMeta[track].key === props.tab), [props.tab])
-  const visibleStars = useMemo(() => {
-    const query = props.query.trim().toLocaleLowerCase()
-    if (!query) return stars
-    return stars.filter((star) => (star.name + star.desc + star.tags.join('') + star.stars).toLocaleLowerCase().includes(query))
-  }, [props.query])
 
   return (
     <section className="block wrap" id="board">
@@ -38,7 +31,7 @@ export function ProjectBoard(props: Props) {
         <div className="search"><label htmlFor="q">SEARCH</label><input id="q" type="search" value={props.query} onChange={(event) => props.onQueryChange(event.target.value)} placeholder="搜项目 / 标签 / 来源…" /></div>
       </div>
       <div className="board-3col">
-        {props.tab === 'star' ? <div style={{ gridColumn: '1/-1' }}>{visibleStars.length > 0 ? <StarGrid stars={visibleStars} /> : <p className="empty">没有匹配的项目</p>}</div> : lanes.map((lane) => {
+        {lanes.map((lane) => {
           const meta = trackMeta[lane]
           const projects = props.projects.filter((project) => project.track === lane && matchesQuery(project, props.query))
           const maxRank = Math.max(...props.projects.filter((project) => project.track === lane).map((project) => project.rank))
