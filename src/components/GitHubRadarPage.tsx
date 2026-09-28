@@ -161,10 +161,12 @@ export function GitHubRadarPage() {
                   <div className="candidate-main">
                     <h3><a href={item.url} target="_blank" rel="noopener noreferrer">{item.repo}</a></h3>
                     <p>{item.description}</p>
-                    <div className="candidate-topics">
+                    <div className="candidate-facts">
                       <span>累计 {number.format(item.stars)} Stars</span>
                       <span className={`language language-${item.language.toLowerCase()}`}><i />{item.language}</span>
                       <span>{relativeDate(item.pushedAt)}</span>
+                    </div>
+                    <div className="candidate-topics">
                       {item.topics.slice(0, 2).map((topic) => <span key={topic}>{topic}</span>)}
                     </div>
                   </div>

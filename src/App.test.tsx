@@ -101,6 +101,7 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: /GitHub.*动态榜/ })).toBeInTheDocument()
     expect(container.querySelectorAll('.candidate-row')).toHaveLength(githubSnapshot.candidates.length)
+    expect(container.querySelectorAll('.candidate-facts')).toHaveLength(githubSnapshot.candidates.length)
     expect(container.querySelectorAll('.candidate-mvp')).toHaveLength(githubSnapshot.candidates.length)
     expect(container.querySelectorAll('.candidate-kit')).toHaveLength(githubSnapshot.candidates.length)
 
