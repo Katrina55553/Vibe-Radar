@@ -101,6 +101,8 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: /GitHub.*动态榜/ })).toBeInTheDocument()
     expect(container.querySelectorAll('.candidate-row')).toHaveLength(githubSnapshot.candidates.length)
+    expect(container.querySelectorAll('.candidate-mvp')).toHaveLength(githubSnapshot.candidates.length)
+    expect(container.querySelectorAll('.candidate-kit')).toHaveLength(githubSnapshot.candidates.length)
 
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: candidate.repo } })
     expect(container.querySelectorAll('.candidate-row')).toHaveLength(1)
@@ -115,5 +117,18 @@ describe('App', () => {
 
   it('labels growth from a zero baseline as a new project instead of a percentage', () => {
     expect(growthRateLabel({ stars: 348, weeklyGrowth: 348 })).toBe('新项目')
+  })
+
+  it('copies a clone command from a GitHub candidate card', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
+    history.replaceState(null, '', '/?view=github')
+    render(<App />)
+    const candidate = githubSnapshot.candidates[0]!
+
+    fireEvent.click(screen.getByRole('button', { name: `复制 ${candidate.repo} 的克隆命令` }))
+
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith(`git clone ${candidate.url}.git`))
+    expect(screen.getByRole('button', { name: `复制 ${candidate.repo} 的克隆命令` })).toHaveTextContent('已复制')
   })
 })

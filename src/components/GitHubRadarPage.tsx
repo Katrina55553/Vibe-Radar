@@ -22,6 +22,29 @@ function relativeDate(value: string) {
   return relativeTime.format(days, 'day') + '更新'
 }
 
+const languageKits: Record<string, { name: string; detail: string }> = {
+  Python: { name: 'Python Workspace', detail: 'venv · pytest · 依赖隔离' },
+  TypeScript: { name: 'Node.js Toolchain', detail: 'pnpm · typecheck · test' },
+  JavaScript: { name: 'Node.js Toolchain', detail: 'npm · lint · test' },
+  Swift: { name: 'Xcode', detail: '本地构建 · Simulator' },
+  Kotlin: { name: 'Android Studio', detail: 'Gradle · Emulator' },
+  Go: { name: 'Go Toolchain', detail: 'go mod · go test' },
+  HTML: { name: 'Browser DevTools', detail: '本地预览 · 响应式检查' },
+}
+
+function starterKit(item: GitHubCandidate) {
+  return languageKits[item.language] ?? { name: `${item.language} Toolchain`, detail: '按 README 配置本地环境' }
+}
+
+function mvpText(item: GitHubCandidate) {
+  if (item.language === 'Python') return '先创建虚拟环境并按 README 安装依赖，跑通最小 Demo 或测试，再改一个参数观察结果。'
+  if (item.language === 'TypeScript' || item.language === 'JavaScript') return '先核对 Node 与包管理器版本，安装依赖并跑通 dev/test，再从一个可见交互开始修改。'
+  if (item.language === 'Swift') return '先确认系统与 Xcode 版本要求，在 Simulator 跑通示例，再从一个独立界面或配置项开始。'
+  if (item.language === 'Kotlin') return '先阅读权限与安装说明，在 Emulator 跑通应用，再验证一个最小功能路径。'
+  if (item.language === 'Go') return '先执行 go mod download 与 go test，跑通本地入口后再替换一个小模块。'
+  return '先阅读 README 与安装要求，跑通最小示例或测试，再完成一个可验证的小改动。'
+}
+
 function sortCandidates(items: GitHubCandidate[], sort: SortKey) {
   return [...items].sort((a, b) => {
     if (sort === 'stars') return b.stars - a.stars
@@ -41,6 +64,7 @@ export function GitHubRadarPage() {
   const [sort, setSort] = useState<SortKey>('growth')
   const [query, setQuery] = useState('')
   const [language, setLanguage] = useState('全部')
+  const [copiedRepo, setCopiedRepo] = useState('')
 
   const languages = useMemo(() => ['全部', ...new Set(githubSnapshot.candidates.map((item) => item.language))], [])
   const candidates = useMemo(() => {
@@ -58,6 +82,15 @@ export function GitHubRadarPage() {
   const totalGrowth = knownGrowth.reduce((sum, item) => sum + (item.weeklyGrowth ?? 0), 0)
   const hottestRepo = sortCandidates(knownGrowth, 'growth')[0]?.repo ?? '—'
   const hasBaseline = githubSnapshot.previousSnapshotAt !== null
+
+  async function copyStartCommand(item: GitHubCandidate) {
+    try {
+      await navigator.clipboard.writeText(`git clone ${item.url}.git`)
+      setCopiedRepo(item.repo)
+    } catch {
+      setCopiedRepo('')
+    }
+  }
 
   return (
     <div className="github-page">
@@ -129,27 +162,53 @@ export function GitHubRadarPage() {
 
           <div className="candidate-list">
             {candidates.map((item, index) => {
+              const kit = starterKit(item)
               return (
                 <article className="candidate-row" key={item.repo}>
-                  <div className="candidate-rank"><span>RANK</span><strong>{String(index + 1).padStart(2, '0')}</strong></div>
+                  <div className="candidate-card-head">
+                    <div className="candidate-rank">#{index + 1}</div>
+                    <strong>增长候选 GitHub 项目</strong>
+                    <span className="candidate-signal">{item.weeklyGrowth === null ? '待采样' : `涨 ${number.format(item.weeklyGrowth)}`}</span>
+                    {index < 3 && <span className="candidate-hot">HOT</span>}
+                  </div>
+
                   <div className="candidate-main">
-                    <div className="candidate-name-row">
-                      <h3><a href={item.url} target="_blank" rel="noopener noreferrer">{item.repo}</a></h3>
-                      <span className={`language language-${item.language.toLowerCase()}`}><i />{item.language}</span>
-                    </div>
+                    <h3><a href={item.url} target="_blank" rel="noopener noreferrer">{item.repo}</a></h3>
                     <p>{item.description}</p>
                     <div className="candidate-topics">
-                      {item.topics.length > 0
-                        ? item.topics.slice(0, 6).map((topic) => <span key={topic}>{topic}</span>)
-                        : <span className="muted-topic">暂无 Topics</span>}
+                      <span>累计 {number.format(item.stars)} Stars</span>
+                      <span className={`language language-${item.language.toLowerCase()}`}><i />{item.language}</span>
+                      <span>{relativeDate(item.pushedAt)}</span>
+                      {item.topics.slice(0, 2).map((topic) => <span key={topic}>{topic}</span>)}
                     </div>
                   </div>
-                  <div className="candidate-metrics">
-                    <div><span>累计 STAR</span><strong>★ {number.format(item.stars)}</strong></div>
-                    <div><span>本周增长</span><strong className="growth">{item.weeklyGrowth === null ? '—' : `+${number.format(item.weeklyGrowth)}`}</strong><small>{growthRateLabel(item)}</small></div>
-                    <div><span>活跃状态</span><strong className="activity">{relativeDate(item.pushedAt)}</strong><small>{formatDate(item.pushedAt)}</small></div>
+
+                  <div className="candidate-mvp">
+                    <strong>MVP</strong>
+                    <p>{mvpText(item)}</p>
                   </div>
-                  <a className="repo-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`打开 ${item.repo}`}>↗</a>
+
+                  <div className="candidate-kit">
+                    <div className="candidate-kit-head"><strong>推荐开工栈</strong><span>完整清单</span></div>
+                    <div className="candidate-kit-item"><b>GitHub CLI</b><small>克隆项目 · 查看 Issues</small></div>
+                    <div className="candidate-kit-item"><b>{kit.name}</b><small>{kit.detail}</small></div>
+                  </div>
+
+                  <div className="candidate-card-foot">
+                    <div className="candidate-total"><span>累计 STAR</span><strong>{number.format(item.stars)}</strong></div>
+                    <button className="candidate-start" onClick={() => void copyStartCommand(item)} aria-label={`复制 ${item.repo} 的克隆命令`}>
+                      <b>{copiedRepo === item.repo ? '已复制' : '一键开工'}</b><small>复制 git clone</small>
+                    </button>
+                    <a className="candidate-source" href={item.url} target="_blank" rel="noopener noreferrer">
+                      <b>看来源</b><small>GitHub ↗</small>
+                    </a>
+                  </div>
+
+                  <div className="candidate-meta" aria-label="项目数据">
+                    <span>周增长 <b>{item.weeklyGrowth === null ? '等待基线' : `+${number.format(item.weeklyGrowth)}`}</b></span>
+                    <span>增长率 <b>{growthRateLabel(item)}</b></span>
+                    <span>同步 <b>{formatDate(item.pushedAt)}</b></span>
+                  </div>
                 </article>
               )
             })}
