@@ -1119,32 +1119,6 @@ export const expandedProjectInputs = [
     "rank": 74,
     "track": "最好玩的项目",
     "likes": 0,
-    "title": "像素沙盒世界",
-    "desc": "沙、水、火和植物落进格子后会互相反应并长出生态。",
-    "mvp": "做 12 种材料、画笔、暂停单步和世界存档。",
-    "tags": [
-      "元胞沙盒",
-      "材料反应",
-      "涌现玩法",
-      "强演示"
-    ],
-    "source": "MaxBittker/sandspiel",
-    "sourceUrl": "https://github.com/MaxBittker/sandspiel",
-    "profile": {
-      "time": "周末完成",
-      "exp": "能装依赖"
-    },
-    "scores": {
-      "total": 77,
-      "wow": 94,
-      "useful": 58,
-      "ease": 74
-    }
-  },
-  {
-    "rank": 75,
-    "track": "最好玩的项目",
-    "likes": 0,
     "title": "Three.js 微型世界",
     "desc": "在一页里搭出有光影、雾气和镜头运动的微缩场景。",
     "mvp": "做一个昼夜循环小岛，加入水面、粒子和镜头漫游。",
@@ -1168,7 +1142,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 76,
+    "rank": 75,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "关系网络探索器",
@@ -1194,7 +1168,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 77,
+    "rank": 76,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "全球风场动画",
@@ -1220,7 +1194,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 78,
+    "rank": 77,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "3D 虚拟形象舞台",
@@ -1246,7 +1220,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 79,
+    "rank": 78,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "可交互矢量动画",
@@ -1272,7 +1246,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 80,
+    "rank": 79,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "Lottie 动画实验室",
@@ -1298,7 +1272,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 81,
+    "rank": 80,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "浏览器合成器",
@@ -1324,7 +1298,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 82,
+    "rank": 81,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "多人无限画布",
@@ -1350,7 +1324,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 83,
+    "rank": 82,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "视觉小说制作器",
@@ -1376,7 +1350,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 84,
+    "rank": 83,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "随机地牢生成器",
@@ -1402,7 +1376,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 85,
+    "rank": 84,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "网页 DOS 游戏盒",
@@ -1428,7 +1402,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 86,
+    "rank": 85,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "舞台控制面板",
@@ -1454,7 +1428,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 87,
+    "rank": 86,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "代码生成视频",
@@ -1480,7 +1454,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 88,
+    "rank": 87,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "可交互故事地图",
@@ -1506,7 +1480,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 89,
+    "rank": 88,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "手绘风图表与图形",
@@ -1532,7 +1506,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 90,
+    "rank": 89,
     "track": "最好玩的项目",
     "likes": 0,
     "title": "Rust 生成艺术",
@@ -3091,32 +3065,6 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 90,
-    "track": "最好用的项目",
-    "likes": 0,
-    "title": "本地 AI 工作台",
-    "desc": "给本地或云端模型一套聊天、知识库、联网搜索和多用户界面。",
-    "mvp": "接两个模型，导入一份文档并跑通检索问答与用户权限。",
-    "tags": [
-      "模型聚合",
-      "知识库",
-      "多用户",
-      "效果直观"
-    ],
-    "source": "open-webui/open-webui",
-    "sourceUrl": "https://github.com/open-webui/open-webui",
-    "profile": {
-      "time": "周末完成",
-      "exp": "能装依赖"
-    },
-    "scores": {
-      "total": 84,
-      "wow": 84,
-      "useful": 92,
-      "ease": 72
-    }
-  },
-  {
     "rank": 31,
     "track": "最好搓的项目",
     "likes": 0,
@@ -3899,32 +3847,6 @@ export const expandedProjectInputs = [
     "rank": 61,
     "track": "最好搓的项目",
     "likes": 0,
-    "title": "可编程氛围灯带",
-    "desc": "刷一块控制器就能让灯带做渐变、音乐律动和屏幕联动。",
-    "mvp": "接 60 颗灯珠，配置 5 个场景并接入手机控制。",
-    "tags": [
-      "地址灯带",
-      "音乐律动",
-      "场景联动",
-      "强演示"
-    ],
-    "source": "Aircoookie/WLED",
-    "sourceUrl": "https://github.com/Aircoookie/WLED",
-    "profile": {
-      "time": "周末完成",
-      "exp": "能折腾硬件"
-    },
-    "scores": {
-      "total": 87,
-      "wow": 94,
-      "useful": 86,
-      "ease": 72
-    }
-  },
-  {
-    "rank": 62,
-    "track": "最好搓的项目",
-    "likes": 0,
     "title": "无代码传感器节点",
     "desc": "用 YAML 把温湿度、人体和继电器接进智能家居。",
     "mvp": "做一个温湿度加人体节点，跑通发现、更新和自动化。",
@@ -3948,7 +3870,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 63,
+    "rank": 62,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "离网 Mesh 对讲机",
@@ -3974,7 +3896,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 64,
+    "rank": 63,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "远程电脑 KVM",
@@ -4000,7 +3922,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 65,
+    "rank": 64,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "多协议物联网网关",
@@ -4026,7 +3948,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 66,
+    "rank": 65,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "无线传感器接收站",
@@ -4052,7 +3974,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 67,
+    "rank": 66,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "3D 打印远程管家",
@@ -4078,7 +4000,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 68,
+    "rank": 67,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "高速 3D 打印固件",
@@ -4104,7 +4026,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 69,
+    "rank": 68,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "CoreXY 3D 打印机",
@@ -4130,7 +4052,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 70,
+    "rank": 69,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "旧打印机固件升级",
@@ -4156,7 +4078,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 71,
+    "rank": 70,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "无线 CNC 控制器",
@@ -4182,7 +4104,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 72,
+    "rank": 71,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "自动寻星跟踪架",
@@ -4208,7 +4130,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 73,
+    "rank": 72,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "开源自动割草机",
@@ -4234,7 +4156,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 74,
+    "rank": 73,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "无人载具自动驾驶",
@@ -4260,7 +4182,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 75,
+    "rank": 74,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "开源无人机飞控",
@@ -4286,7 +4208,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 76,
+    "rank": 75,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "树莓派数字图传",
@@ -4312,7 +4234,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 77,
+    "rank": 76,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "摄像头开源固件",
@@ -4338,7 +4260,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 78,
+    "rank": 77,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "本地 AI 监控录像",
@@ -4364,7 +4286,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 79,
+    "rank": 78,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "开源路由器系统",
@@ -4390,7 +4312,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 80,
+    "rank": 79,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "随身旅行路由器",
@@ -4416,7 +4338,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 81,
+    "rank": 80,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "车库门本地控制",
@@ -4442,7 +4364,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 82,
+    "rank": 81,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "智能花园灌溉",
@@ -4468,7 +4390,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 83,
+    "rank": 82,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "可编程种植机器人",
@@ -4494,7 +4416,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 84,
+    "rank": 83,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "带力反馈的智能旋钮",
@@ -4520,7 +4442,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 85,
+    "rank": 84,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "自定义机械键盘",
@@ -4546,7 +4468,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 86,
+    "rank": 85,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "低功耗无线键盘",
@@ -4572,7 +4494,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 87,
+    "rank": 86,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "桌面实体音量台",
@@ -4598,7 +4520,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 88,
+    "rank": 87,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "自制六自由度 SpaceMouse",
@@ -4624,7 +4546,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 89,
+    "rank": 88,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "自行车超车距离仪",
@@ -4650,7 +4572,7 @@ export const expandedProjectInputs = [
     }
   },
   {
-    "rank": 90,
+    "rank": 89,
     "track": "最好搓的项目",
     "likes": 0,
     "title": "光伏逆变器监控",

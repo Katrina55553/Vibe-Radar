@@ -1,6 +1,6 @@
 # Vibe Coding 雷达
 
-基于 React 19、Vite 8 和 TypeScript 的静态项目榜单，收录好玩、好用、好搓三条路线各 90 项，共 270 项。
+基于 React 19、Vite 8 和 TypeScript 的静态项目榜单，收录好玩、好用、好搓三条路线各 99 项，共 297 项。
 
 ## 开发
 

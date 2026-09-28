@@ -7,11 +7,11 @@ import { matchesQuery, recommendProjects } from './recommendation'
 const projects = projectInputs.map(enrichProject)
 
 describe('project recommendation', () => {
-  it('loads 90 ranked projects in each track and preserves imported scores', () => {
+  it('loads 99 ranked projects in each track and preserves imported scores', () => {
     for (const track of ['最好玩的项目', '最好用的项目', '最好搓的项目'] as const) {
       const lane = projects.filter((project) => project.track === track)
-      expect(lane).toHaveLength(90)
-      expect(lane.map((project) => project.rank)).toEqual(Array.from({ length: 90 }, (_, index) => index + 1))
+      expect(lane).toHaveLength(99)
+      expect(lane.map((project) => project.rank)).toEqual(Array.from({ length: 99 }, (_, index) => index + 1))
     }
 
     const imported = projects.find((project) => project.title === '跨平台近场传输')

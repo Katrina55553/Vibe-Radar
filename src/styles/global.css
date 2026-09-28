@@ -120,25 +120,110 @@ h2{font-size:clamp(26px,3vw,36px);font-weight:900;letter-spacing:-.01em}
 .lane-head.make .mono{color:var(--violet)}
 .lane-head strong{font-size:17px}
 .lane-head em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-left:auto}
-.card{background:var(--card);border:1.5px solid var(--line);border-radius:13px;padding:15px 16px;margin-bottom:12px;
-  display:flex;flex-direction:column;gap:8px;transition:transform .1s,box-shadow .1s}
-.card:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--line)}
-.card .row1{display:flex;align-items:center;gap:8px}
-.card .rk{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-2)}
-.like{margin-left:auto;display:inline-flex;align-items:center;gap:5px;border:1.2px solid var(--line);
-  background:var(--paper-2);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--ink-2)}
-.like:hover{border-color:var(--accent);color:var(--accent)}
-.like.liked{background:var(--accent);border-color:var(--accent);color:#fff}
-.card h3{font-size:15.5px;font-weight:800}
-.card .desc{font-size:13px;color:var(--ink-2)}
-.card .mvp{font-size:12.5px;color:var(--ink);background:var(--paper-2);border-left:3px solid var(--accent);
-  border-radius:0 8px 8px 0;padding:7px 10px}
-.card .mvp::before{content:"MVP · ";font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700}
-.card .foot{display:flex;align-items:center;gap:8px;margin-top:2px}
-.card .src{margin-left:auto;font-size:12px;font-family:var(--mono);color:var(--ink-2)}
-.card .src:hover{color:var(--accent)}
-.go{border:1.3px solid var(--line);background:var(--card);border-radius:8px;padding:5px 11px;font-size:12px;font-weight:700}
-.go:hover{background:var(--ink);color:var(--paper)}
+.card{
+  --card-accent:var(--accent);
+  --card-tint:rgba(228,87,46,.09);
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:linear-gradient(145deg,var(--card) 0%,var(--card) 70%,var(--card-tint) 140%);
+  border:1.4px solid color-mix(in srgb,var(--line) 84%,var(--card-accent));
+  border-radius:18px;
+  padding:18px 19px 17px 22px;
+  margin-bottom:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 2px 0 rgba(31,29,25,.08),0 8px 22px rgba(31,29,25,.07);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:5px;
+  background:var(--card-accent);
+}
+.card.play{--card-accent:var(--accent);--card-tint:rgba(228,87,46,.09)}
+.card.use{--card-accent:var(--teal);--card-tint:rgba(46,111,94,.09)}
+.card.make{--card-accent:var(--violet);--card-tint:rgba(91,75,138,.09)}
+.card:hover{
+  transform:translateY(-3px);
+  border-color:var(--card-accent);
+  box-shadow:0 3px 0 color-mix(in srgb,var(--card-accent) 35%,transparent),0 14px 30px rgba(31,29,25,.12);
+}
+.card .row1{display:flex;align-items:center;gap:8px;min-height:30px}
+.card .rk{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:800;
+  color:var(--paper);
+  background:var(--ink);
+  border-radius:7px;
+  padding:4px 7px;
+  line-height:1;
+  letter-spacing:.02em;
+}
+.card .trk{border-radius:7px;padding:4px 7px;line-height:1;font-weight:800}
+.like{
+  margin-left:auto;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:1px solid color-mix(in srgb,var(--line) 70%,transparent);
+  background:rgba(255,255,255,.58);
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:12px;
+  color:var(--ink-2);
+  box-shadow:0 2px 8px rgba(31,29,25,.05);
+  transition:transform .15s ease,border-color .15s ease,color .15s ease,background .15s ease;
+}
+.like:hover{transform:translateY(-1px);border-color:var(--card-accent);color:var(--card-accent);background:var(--card)}
+.like.liked{background:var(--card-accent);border-color:var(--card-accent);color:#fff}
+.card h3{font-size:18px;font-weight:850;line-height:1.3;letter-spacing:-.02em;margin-top:1px}
+.card .desc{font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.card .tags{gap:6px}
+.card .tag{
+  border-color:color-mix(in srgb,var(--card-accent) 28%,var(--line));
+  background:color-mix(in srgb,var(--card-tint) 55%,var(--card));
+  padding:4px 9px;
+  font-size:11.5px;
+}
+.card .mvp{
+  font-size:12.5px;
+  line-height:1.55;
+  color:var(--ink);
+  background:color-mix(in srgb,var(--card-tint) 70%,var(--paper-2));
+  border:1px solid color-mix(in srgb,var(--card-accent) 18%,transparent);
+  border-left:4px solid var(--card-accent);
+  border-radius:10px;
+  padding:9px 11px;
+}
+.card .mvp::before{content:"MVP · ";font-family:var(--mono);font-size:10px;color:var(--card-accent);font-weight:800;letter-spacing:.04em}
+.card .foot{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:3px;
+  padding-top:12px;
+  border-top:1px dashed color-mix(in srgb,var(--line) 25%,transparent);
+}
+.card .src{margin-left:auto;font-size:11.5px;font-family:var(--mono);color:var(--ink-2);transition:color .15s ease}
+.card .src:hover{color:var(--card-accent)}
+.go{
+  border:1.3px solid var(--ink);
+  background:var(--ink);
+  color:var(--paper);
+  border-radius:9px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:2px 2px 0 var(--card-accent);
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+}
+.go:hover{background:var(--card-accent);border-color:var(--card-accent);transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.like:focus-visible,.go:focus-visible,.card .src:focus-visible{outline:3px solid color-mix(in srgb,var(--card-accent) 45%,transparent);outline-offset:3px}
 .empty{grid-column:1/-1;text-align:center;color:var(--ink-2);padding:40px 0;font-family:var(--mono)}
 
 /* ---------- refs / footer ---------- */

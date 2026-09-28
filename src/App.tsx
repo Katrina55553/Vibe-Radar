@@ -74,7 +74,7 @@ function ProjectRadarApp() {
           <div>
             <p className="eyebrow mono">Beginner-friendly project board · 更新 2026/09/28</p>
             <h1>Vibe Coding<br /><span className="radar">雷达</span></h1>
-            <p className="lede">给刚开始 Coding 的新手，把<b>好玩、好用、好搓（硬件）</b>三条路线整理成一张 270 项可分享榜单：每个项目都有 MVP、体验标签、参考来源和三维评分。现在还能按时间、目标和经验生成适合你的开工清单。</p>
+            <p className="lede">给刚开始 Coding 的新手，把<b>好玩、好用、好搓（硬件）</b>三条路线整理成一张 297 项可分享榜单：每个项目都有 MVP、体验标签、参考来源和三维评分。现在还能按时间、目标和经验生成适合你的开工清单。</p>
             <div className="update-note"><strong>每周五 08:00 更新</strong><span>新星项目与常青项目库同步核验</span></div>
             <div className="cta-row"><a className="btn primary" href="#picker">帮我选项目 ↓</a><a className="btn" href="#board">直接看榜单</a></div>
           </div>

@@ -43,7 +43,7 @@ export function ProjectBoard(props: Props) {
                   const id = projectId(project)
                   const liked = Boolean(props.likedIds[id])
                   return (
-                    <article className="card" key={id}>
+                    <article className={`card ${meta.key}`} key={id}>
                       <div className="row1"><span className="rk">#{project.rank}</span><span className={`trk ${meta.key}`}>{meta.short}</span><button className={`like${liked ? ' liked' : ''}`} aria-label={`给${project.title}点赞`} onClick={() => props.onToggleLike(project)}>{liked ? '♥' : '赞'} <b>{project.likes + (liked ? 1 : 0)}</b></button></div>
                       <h3>{project.title}</h3><p className="desc">{project.desc}</p>
                       <div className="tags">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
