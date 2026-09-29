@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { githubSnapshot, type GitHubCandidate } from '../data/github'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { SiteHeader, type AppRoute } from './SiteHeader'
 
 type SortKey = 'growth' | 'stars' | 'updated'
 
@@ -61,7 +62,11 @@ export function growthRateLabel(item: Pick<GitHubCandidate, 'stars' | 'weeklyGro
   return `+${(item.weeklyGrowth / previousStars * 100).toFixed(1)}%`
 }
 
-export function GitHubRadarPage() {
+interface GitHubRadarPageProps {
+  onNavigate: (route: AppRoute) => void
+}
+
+export function GitHubRadarPage({ onNavigate }: GitHubRadarPageProps) {
   const snapshotDate = githubSnapshot.generatedAt.slice(0, 10)
   const [sort, setSort] = useState<SortKey>('growth')
   const [query, setQuery] = useState('')
@@ -105,15 +110,7 @@ export function GitHubRadarPage() {
   return (
     <div className="github-page">
       <a className="skip" href="#candidate-list">跳到候选列表</a>
-      <header className="site github-header">
-        <div className="wrap">
-          <a className="logo" href="?"><span className="dot" />Vibe Coding 雷达</a>
-          <nav className="pages" aria-label="页面切换">
-            <a href="?">项目榜</a>
-            <a className="active" href="?view=github">GitHub 动态榜</a>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader route="github" onNavigate={onNavigate} />
 
       <main>
         <section className="github-hero wrap">

@@ -3,6 +3,7 @@ import { ProjectBoard, type BoardTab } from './components/ProjectBoard'
 import { ProjectModal } from './components/ProjectModal'
 import { ProjectPicker } from './components/ProjectPicker'
 import { GitHubRadarPage } from './components/GitHubRadarPage'
+import { SiteHeader, type AppRoute } from './components/SiteHeader'
 import { defaultPicks } from './data/content'
 import { projectInputs } from './data/projects'
 import { enrichProject, type Project } from './domain/project'
@@ -10,13 +11,18 @@ import { useLocalStorage } from './hooks/useLocalStorage'
 
 const projects = projectInputs.map(enrichProject)
 const validTabs = new Set<BoardTab>(['all', 'play', 'use', 'make'])
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
 
 function initialTab(): BoardTab {
   const tab = new URLSearchParams(location.search).get('tab') as BoardTab | null
   return tab && validTabs.has(tab) ? tab : 'all'
 }
 
-function ProjectRadarApp() {
+interface RoutedPageProps {
+  onNavigate: (route: AppRoute) => void
+}
+
+function ProjectRadarApp({ onNavigate }: RoutedPageProps) {
   const [picks, setPicks] = useState(defaultPicks)
   const [tab, setTab] = useState<BoardTab>(initialTab)
   const [query, setQuery] = useState('')
@@ -54,7 +60,7 @@ function ProjectRadarApp() {
   return (
     <>
       <a className="skip" href="#board">跳到榜单</a>
-      <header className="site"><div className="wrap"><a className="logo" href="#top"><span className="dot" />Vibe Coding 雷达</a><nav className="pages" aria-label="页面切换"><a href="#board" className="active">项目榜</a><a href="#picker">帮我选</a><a className="mobile-visible" href="?view=github">GitHub 动态榜</a></nav></div></header>
+      <SiteHeader route="projects" onNavigate={onNavigate} />
 
       <main id="top">
         <div className="wrap hero">
@@ -86,5 +92,28 @@ function ProjectRadarApp() {
 }
 
 export default function App() {
-  return new URLSearchParams(location.search).get('view') === 'github' ? <GitHubRadarPage /> : <ProjectRadarApp />
+  const [route, setRoute] = useState<AppRoute>(() => getRoute())
+
+  useEffect(() => {
+    const syncRoute = () => setRoute(getRoute())
+    window.addEventListener('popstate', syncRoute)
+    return () => window.removeEventListener('popstate', syncRoute)
+  }, [])
+
+  function navigate(nextRoute: AppRoute) {
+    const nextPath = nextRoute === 'github' ? `${basePath}/github` : `${basePath}/`
+    if (route !== nextRoute || location.search || location.hash) history.pushState(null, '', nextPath)
+    setRoute(nextRoute)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }
+
+  return route === 'github'
+    ? <GitHubRadarPage onNavigate={navigate} />
+    : <ProjectRadarApp onNavigate={navigate} />
+}
+
+function getRoute(): AppRoute {
+  const path = location.pathname.replace(/\/+$/, '')
+  return path.endsWith('/github') ? 'github' : 'projects'
 }

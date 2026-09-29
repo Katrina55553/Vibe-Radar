@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { matchesQuery } from '../domain/recommendation'
 import { tracks, trackMeta, type Project, type TrackKey } from '../domain/project'
 
@@ -17,9 +17,34 @@ interface Props {
 
 const tabs: Array<[BoardTab, string]> = [['all', '全部'], ['play', '好玩'], ['use', '好用'], ['make', '好搓（硬件）']]
 const projectId = (project: Project) => `${project.track}#${project.rank}`
+const pageSize = 12
+
+function initialVisibleCounts() {
+  return Object.fromEntries(tracks.map((track) => [track, pageSize])) as Record<(typeof tracks)[number], number>
+}
 
 export function ProjectBoard(props: Props) {
   const lanes = useMemo(() => tracks.filter((track) => props.tab === 'all' || trackMeta[track].key === props.tab), [props.tab])
+  const [visibleCounts, setVisibleCounts] = useState(initialVisibleCounts)
+  const previousQuery = useRef(props.query)
+  const projectsByLane = useMemo(() => Object.fromEntries(tracks.map((track) => [
+    track,
+    props.projects.filter((project) => project.track === track && matchesQuery(project, props.query)),
+  ])) as Record<(typeof tracks)[number], Project[]>, [props.projects, props.query])
+  const maxRanks = useMemo(() => Object.fromEntries(tracks.map((track) => [
+    track,
+    Math.max(...props.projects.filter((project) => project.track === track).map((project) => project.rank)),
+  ])) as Record<(typeof tracks)[number], number>, [props.projects])
+
+  useEffect(() => {
+    if (previousQuery.current === props.query) return
+    previousQuery.current = props.query
+    setVisibleCounts(initialVisibleCounts())
+  }, [props.query])
+
+  function showMore(lane: (typeof tracks)[number]) {
+    setVisibleCounts((current) => ({ ...current, [lane]: current[lane] + pageSize }))
+  }
 
   return (
     <section className="block wrap" id="board">
@@ -33,13 +58,14 @@ export function ProjectBoard(props: Props) {
       <div className="board-3col">
         {lanes.map((lane) => {
           const meta = trackMeta[lane]
-          const projects = props.projects.filter((project) => project.track === lane && matchesQuery(project, props.query))
-          const maxRank = Math.max(...props.projects.filter((project) => project.track === lane).map((project) => project.rank))
+          const projects = projectsByLane[lane]
+          const visibleProjects = projects.slice(0, visibleCounts[lane])
+          const remaining = projects.length - visibleProjects.length
           return (
             <div className={`lane${lanes.length === 1 ? ' solo' : ''}`} key={lane}>
-              <div className={`lane-head ${meta.key}`}><span className="mono">{meta.label}</span><strong>{lane}</strong><em>#1 → #{maxRank}</em></div>
+              <div className={`lane-head ${meta.key}`}><span className="mono">{meta.label}</span><strong>{lane}</strong><em>#1 → #{maxRanks[lane]}</em></div>
               <div className="cards">
-                {projects.length === 0 ? <p className="empty">没有匹配的项目</p> : projects.map((project) => {
+                {projects.length === 0 ? <p className="empty">没有匹配的项目</p> : visibleProjects.map((project) => {
                   const id = projectId(project)
                   const liked = Boolean(props.likedIds[id])
                   return (
@@ -52,6 +78,12 @@ export function ProjectBoard(props: Props) {
                     </article>
                   )
                 })}
+                {remaining > 0 && (
+                  <button className="load-more" onClick={() => showMore(lane)}>
+                    再看 {Math.min(pageSize, remaining)} 个
+                    <small>已显示 {visibleProjects.length} / {projects.length}</small>
+                  </button>
+                )}
               </div>
             </div>
           )

@@ -22,6 +22,7 @@ describe('App', () => {
     expect(container.querySelector('.stats .v')).toHaveTextContent('297')
     expect(container.querySelectorAll('.lane-head em')).toHaveLength(3)
     for (const range of container.querySelectorAll('.lane-head em')) expect(range).toHaveTextContent('#1 → #99')
+    expect(container.querySelectorAll('#board .card')).toHaveLength(36)
 
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'WebGL 流体玩具' } })
     expect(container.querySelectorAll('#board .card')).toHaveLength(1)
@@ -43,6 +44,18 @@ describe('App', () => {
     fireEvent.click(button)
     expect(button).toHaveClass('liked')
     expect(button).toHaveTextContent('83')
+  })
+
+  it('renders project cards in batches', () => {
+    const { container } = render(<App />)
+    const loadMoreButtons = screen.getAllByRole('button', { name: /再看 12 个/ })
+
+    expect(loadMoreButtons).toHaveLength(3)
+    expect(container.querySelectorAll('#board .card')).toHaveLength(36)
+
+    fireEvent.click(loadMoreButtons[0]!)
+    expect(container.querySelectorAll('#board .card')).toHaveLength(48)
+    expect(loadMoreButtons[0]).toHaveTextContent('已显示 24 / 99')
   })
 
   it('keeps rendering when local storage writes are blocked', () => {
@@ -88,7 +101,7 @@ describe('App', () => {
   })
 
   it('renders and filters the GitHub candidate page', () => {
-    history.replaceState(null, '', '/?view=github')
+    history.replaceState(null, '', '/github')
     const { container } = render(<App />)
     const candidate = githubSnapshot.candidates[0]!
 
@@ -119,6 +132,20 @@ describe('App', () => {
     expect(screen.getByRole('link', { name: 'GitHub 动态榜' })).toHaveClass('mobile-visible')
   })
 
+  it('switches both ranking pages through client-side routes', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('link', { name: 'GitHub 动态榜' }))
+    expect(location.pathname).toBe('/github')
+    expect(screen.getByRole('heading', { name: /GitHub.*动态榜/ })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'GitHub 动态榜' })).toHaveAttribute('aria-current', 'page')
+
+    fireEvent.click(screen.getByRole('link', { name: '项目榜' }))
+    expect(location.pathname).toBe('/')
+    expect(screen.getByRole('heading', { name: /Vibe Coding.*雷达/ })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '项目榜' })).toHaveAttribute('aria-current', 'page')
+  }, 10_000)
+
   it('labels growth from a zero baseline as a new project instead of a percentage', () => {
     expect(growthRateLabel({ stars: 348, weeklyGrowth: 348 })).toBe('新项目')
   })
@@ -126,7 +153,7 @@ describe('App', () => {
   it('copies a clone command from a GitHub candidate card', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined)
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
-    history.replaceState(null, '', '/?view=github')
+    history.replaceState(null, '', '/github')
     render(<App />)
     const candidate = githubSnapshot.candidates[0]!
 

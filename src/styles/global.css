@@ -27,6 +27,9 @@ nav.pages{display:flex;gap:4px;margin-left:auto}
 nav.pages a{font-size:14px;padding:7px 13px;border-radius:999px;color:var(--ink-2);border:1px solid transparent;display:flex;align-items:center;gap:6px}
 nav.pages a.active{background:var(--ink);color:var(--paper);font-weight:600}
 nav.pages a:not(.active):hover{border-color:var(--line);color:var(--ink)}
+.gh-link{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+.gh-link svg{width:17px;height:17px}
+.gh-link:hover{background:var(--ink);color:var(--paper)}
 .soon{font-family:var(--mono);font-size:9px;border:1px solid currentColor;border-radius:4px;padding:1px 4px;opacity:.7}
 
 /* ---------- hero ---------- */
@@ -113,6 +116,11 @@ h2{font-size:clamp(26px,3vw,36px);font-weight:900;letter-spacing:-.01em}
 .lane .cards{display:block}
 .lane.solo .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .lane.solo .cards .card{margin-bottom:0}
+.load-more{width:100%;border:1.5px dashed var(--line);border-radius:12px;background:var(--card);color:var(--ink);padding:13px 16px;font-size:13px;font-weight:800;transition:background .12s,color .12s}
+.load-more:hover{background:var(--ink);color:var(--paper)}
+.load-more small{display:block;margin-top:2px;color:var(--ink-2);font:10px var(--mono)}
+.load-more:hover small{color:var(--paper-2)}
+.lane.solo .load-more{grid-column:1/-1}
 .lane-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:14px}
 .lane-head .mono{font-weight:700}
 .lane-head.play .mono{color:var(--accent)}
@@ -282,12 +290,6 @@ footer.site .brand{margin-left:auto;font-weight:800;color:var(--ink)}
 
 /* ---------- GitHub radar ---------- */
 .github-page{--github-ink:#111827;--github-muted:#687386;--github-line:#cfd7e3;--github-lime:#caff3d;min-height:100vh;background:#edf1f5;color:var(--github-ink)}
-.github-page header.site{background:rgba(255,255,255,.96);border-color:var(--github-ink);backdrop-filter:blur(12px)}
-.github-page .logo{color:var(--github-ink)}
-.github-page .logo .dot{border-radius:0;background:var(--github-lime);box-shadow:3px 3px 0 var(--github-ink)}
-.github-page nav.pages a{color:var(--github-muted);border-radius:0}
-.github-page nav.pages a:not(.active):hover{border-color:var(--github-ink);color:var(--github-ink)}
-.github-page nav.pages a.active{background:var(--github-ink);color:#fff}
 .github-hero{padding-top:58px;padding-bottom:38px}
 .github-title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(36px,6vw,96px)}
 .github-title-row h1{flex:none;white-space:nowrap}
@@ -346,7 +348,9 @@ footer.site .brand{margin-left:auto;font-weight:800;color:var(--ink)}
   nav.pages a:not(.active){display:none}
   nav.pages a.mobile-visible{display:flex}
   .picker{padding:24px 18px}
-  .github-page nav.pages a:not(.active){display:flex}
+  header.site .wrap{gap:10px}
+  nav.pages a{padding:7px 9px;font-size:12px}
+  .gh-link{display:none}
   .github-hero{padding-top:40px;padding-bottom:30px}
   .github-page h1{font-size:clamp(40px,13vw,52px);white-space:normal}
   .github-board-head{align-items:start;padding:20px 14px 0}.snapshot-stamp{display:none}
