@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { githubSnapshot, type GitHubCandidate } from '../data/github'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 type SortKey = 'growth' | 'stars' | 'updated'
 
@@ -61,10 +62,19 @@ export function growthRateLabel(item: Pick<GitHubCandidate, 'stars' | 'weeklyGro
 }
 
 export function GitHubRadarPage() {
+  const snapshotDate = githubSnapshot.generatedAt.slice(0, 10)
   const [sort, setSort] = useState<SortKey>('growth')
   const [query, setQuery] = useState('')
   const [language, setLanguage] = useState('全部')
   const [copiedRepo, setCopiedRepo] = useState('')
+  const [weeklyDismissed, setWeeklyDismissed] = useLocalStorage(`vcr-github-weekly-${snapshotDate.replaceAll('-', '')}`, false)
+  const [weeklyVisible, setWeeklyVisible] = useState(false)
+
+  useEffect(() => {
+    if (weeklyDismissed) return
+    const timer = window.setTimeout(() => setWeeklyVisible(true), 1200)
+    return () => window.clearTimeout(timer)
+  }, [weeklyDismissed])
 
   const languages = useMemo(() => ['全部', ...new Set(githubSnapshot.candidates.map((item) => item.language))], [])
   const candidates = useMemo(() => {
@@ -85,6 +95,11 @@ export function GitHubRadarPage() {
     } catch {
       setCopiedRepo('')
     }
+  }
+
+  function dismissWeekly() {
+    setWeeklyVisible(false)
+    setWeeklyDismissed(true)
   }
 
   return (
@@ -113,6 +128,7 @@ export function GitHubRadarPage() {
                   <strong>{hasWeeklyRanking ? '7 日热度数据已就绪' : '仓库数据已就绪'}</strong>
                   <span>{formatDate(githubSnapshot.generatedAt)}</span>
                 </div>
+                <div className="update-note"><strong>每周五 08:00 更新</strong><span>GitHub Trending 与仓库资料同步核验</span></div>
               </div>
             </div>
           </div>
@@ -212,7 +228,9 @@ export function GitHubRadarPage() {
         </section>
       </main>
 
-      <footer className="site"><div className="wrap"><span>数据来自 GitHub 公开仓库信息</span><span className="brand">Vibe Coding 雷达 · GitHub 动态榜</span></div></footer>
+      <footer className="site"><div className="wrap"><button className="footer-link" onClick={() => setWeeklyVisible(true)}>更新日志</button><span>每周五 08:00 定时刷新</span><span>数据来自 GitHub 公开仓库信息</span><span className="brand">Vibe Coding 雷达 · GitHub 动态榜</span></div></footer>
+
+      {weeklyVisible && <div className="weekly show"><div className="wd"><span className="date mono">{snapshotDate}</span><button onClick={dismissWeekly} aria-label="关闭更新提醒">×</button></div><h4>本周 GitHub 动态榜更新</h4><p>GitHub Trending 周榜与仓库公开信息已同步核验。</p><ul><li>同步 {githubSnapshot.candidates.length} 个近 7 天热门项目</li><li>按页面公开的本周新增 Star 自动排序</li><li>项目描述、语言与活跃时间来自 GitHub 公开资料</li></ul><div className="wact"><button className="btn" onClick={dismissWeekly}>知道了</button></div></div>}
     </div>
   )
 }

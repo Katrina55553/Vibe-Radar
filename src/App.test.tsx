@@ -93,6 +93,8 @@ describe('App', () => {
     const candidate = githubSnapshot.candidates[0]!
 
     expect(screen.getByRole('heading', { name: /GitHub.*动态榜/ })).toBeInTheDocument()
+    expect(screen.getByText('每周五 08:00 更新')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '更新日志' })).toBeInTheDocument()
     expect(container.querySelectorAll('.candidate-row')).toHaveLength(githubSnapshot.candidates.length)
     expect(container.querySelectorAll('.candidate-facts')).toHaveLength(githubSnapshot.candidates.length)
     expect(container.querySelectorAll('.candidate-mvp')).toHaveLength(githubSnapshot.candidates.length)
@@ -101,6 +103,14 @@ describe('App', () => {
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: candidate.repo } })
     expect(container.querySelectorAll('.candidate-row')).toHaveLength(1)
     expect(container.querySelector('.candidate-row h3')).toHaveTextContent(candidate.repo)
+  })
+
+  it('keeps the static project board free of scheduled-update messaging', () => {
+    render(<App />)
+
+    expect(screen.getByText(/297 项静态精选/)).toBeInTheDocument()
+    expect(screen.queryByText('每周五 08:00 更新')).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: '更新日志' })).not.toBeInTheDocument()
   })
 
   it('keeps the GitHub radar entry visible to the mobile navigation', () => {

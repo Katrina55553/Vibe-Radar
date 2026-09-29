@@ -297,6 +297,8 @@ footer.site .brand{margin-left:auto;font-weight:800;color:var(--ink)}
 .github-page h1 .radar{color:var(--github-ink)}
 .github-page h1 .radar::after{background:var(--github-lime);height:14px;bottom:2px}
 .github-page .lede{color:var(--github-muted);max-width:none;font-size:15px}
+.github-page .update-note{background:#fff;border-color:var(--github-ink);color:var(--github-muted)}
+.github-page .update-note strong{color:var(--github-ink)}
 .sync-line{margin-top:18px;display:flex;align-items:center;gap:10px;color:var(--github-muted);font-family:var(--mono);font-size:11px;letter-spacing:.04em}
 .sync-line strong{color:var(--github-ink)}.sync-dot{width:9px;height:9px;background:var(--github-lime);border:2px solid var(--github-ink);box-shadow:3px 3px 0 var(--github-lime)}
 .github-board{padding-top:20px;padding-bottom:44px}
@@ -327,6 +329,8 @@ footer.site .brand{margin-left:auto;font-weight:800;color:var(--ink)}
 .github-empty{grid-column:1/-1;text-align:center;color:var(--github-muted);padding:60px;background:#fff;border:1px solid #9ba7b7;font:12px var(--mono)}
 .pipeline{margin-top:28px;margin-bottom:30px;border:1px solid #9ba7b7;border-left:6px solid var(--github-ink);background:#fff;padding:20px 22px;display:flex;align-items:center;gap:36px}.pipeline>span{color:var(--github-muted)}.pipeline>div{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:12px}.pipeline i{font-style:normal;color:#637700;background:var(--github-lime);padding:0 4px}
 .github-page footer.site{border-color:var(--github-ink);color:var(--github-muted);background:#fff}.github-page footer.site .brand{color:var(--github-ink)}
+.github-page .weekly{background:#fff;border-color:var(--github-ink);box-shadow:6px 6px 0 var(--github-lime)}
+.github-page .weekly .btn{border-color:var(--github-ink);background:var(--github-lime);color:var(--github-ink);box-shadow:3px 3px 0 var(--github-ink)}
 
 @media (max-width:980px){
   .hero{grid-template-columns:1fr}
