@@ -37,6 +37,12 @@ describe('project data', () => {
     expect(new Set(titles).size, 'duplicate titles found').toBe(titles.length)
   })
 
+  it('derives a unique stable ID for every project', () => {
+    const ids = projects.map((project) => project.id)
+    expect(new Set(ids).size, 'duplicate project IDs found').toBe(ids.length)
+    for (const project of projects) expect(project.id, project.title).toMatch(/^project:/)
+  })
+
   it('stores likes as non-negative integers', () => {
     for (const input of projectInputs) {
       expect(Number.isSafeInteger(input.likes), input.title).toBe(true)

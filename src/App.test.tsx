@@ -46,6 +46,19 @@ describe('App', () => {
     expect(button).toHaveTextContent('83')
   })
 
+  it('migrates rank-based likes to stable project IDs', async () => {
+    localStorage.setItem('vcr-likes', JSON.stringify({ '最好玩的项目#1': true }))
+    const { container } = render(<App />)
+
+    const button = container.querySelector('#board .like') as HTMLButtonElement
+    await waitFor(() => expect(button).toHaveClass('liked'))
+
+    const saved = JSON.parse(localStorage.getItem('vcr-likes') ?? '{}') as Record<string, true>
+    expect(saved['最好玩的项目#1']).toBeUndefined()
+    expect(Object.keys(saved)).toHaveLength(1)
+    expect(Object.keys(saved)[0]).toMatch(/^project:/)
+  })
+
   it('renders project cards in batches', () => {
     const { container } = render(<App />)
     const loadMoreButtons = screen.getAllByRole('button', { name: /再看 12 个/ })

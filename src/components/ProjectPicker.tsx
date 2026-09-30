@@ -54,7 +54,7 @@ export function ProjectPicker({ projects, picks, onChange, onOpen }: Props) {
               project.exp === picks.exp ? `经验“${picks.exp}”` : null,
             ].filter((match): match is string => Boolean(match))
             return (
-              <article className="reco-card" key={`${project.track}-${project.rank}`}>
+              <article className="reco-card" key={project.id}>
                 <div className="top"><span className="rk">#{index + 1}</span><span className={`trk ${meta.key}`}>{meta.short}</span><span className="score">{project.total}</span></div>
                 <h3>{project.title}</h3>
                 <p className="why">推荐理由：{matches.length > 0 ? `匹配${matches.join('、')}` : '综合排名靠前'}；先做一个{project.form}形态的 MVP。</p>

@@ -6,7 +6,7 @@ import { GitHubRadarPage } from './components/GitHubRadarPage'
 import { SiteHeader, type AppRoute } from './components/SiteHeader'
 import { defaultPicks } from './data/content'
 import { projectInputs } from './data/projects'
-import { enrichProject, type Project } from './domain/project'
+import { enrichProject, legacyProjectId, type Project } from './domain/project'
 import { useLocalStorage } from './hooks/useLocalStorage'
 
 const projects = projectInputs.map(enrichProject)
@@ -31,6 +31,20 @@ function ProjectRadarApp({ onNavigate }: RoutedPageProps) {
   const [toast, setToast] = useState('')
 
   useEffect(() => {
+    const currentIdByLegacyId = new Map(projects.map((project) => [legacyProjectId(project), project.id]))
+    setLikedIds((current) => {
+      let changed = false
+      const next: Record<string, true> = {}
+      for (const id of Object.keys(current)) {
+        const currentId = currentIdByLegacyId.get(id) ?? id
+        next[currentId] = true
+        if (currentId !== id) changed = true
+      }
+      return changed ? next : current
+    })
+  }, [setLikedIds])
+
+  useEffect(() => {
     if (!toast) return
     const timer = window.setTimeout(() => setToast(''), 2200)
     return () => window.clearTimeout(timer)
@@ -48,7 +62,7 @@ function ProjectRadarApp({ onNavigate }: RoutedPageProps) {
   }
 
   function toggleLike(project: Project) {
-    const id = `${project.track}#${project.rank}`
+    const id = project.id
     setLikedIds((current) => {
       const next = { ...current }
       if (next[id]) delete next[id]

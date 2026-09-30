@@ -26,6 +26,7 @@ export interface ProjectProfile {
 }
 
 export interface ProjectInput {
+  id?: string
   rank: number
   track: Track
   likes: number
@@ -40,6 +41,7 @@ export interface ProjectInput {
 }
 
 export interface Project extends ProjectInput {
+  id: string
   form: ProjectForm
   goal: ProjectGoal
   time: ProjectTime
@@ -70,6 +72,23 @@ export const trackMeta: Record<Track, TrackMeta> = {
   最好玩的项目: { key: 'play', short: '好玩', label: 'PLAY', lane: '最好玩的项目' },
   最好用的项目: { key: 'use', short: '好用', label: 'USE', lane: '最好用的项目' },
   最好搓的项目: { key: 'make', short: '好搓', label: 'MAKE', lane: '最好搓的项目' },
+}
+
+export function projectIdOf(project: ProjectInput): string {
+  if (project.id?.trim()) return project.id.trim()
+
+  const rawSource = project.sourceUrl?.trim() || project.source.trim()
+  try {
+    const url = new URL(rawSource)
+    const path = url.pathname.replace(/\/+$/, '').replace(/\.git$/i, '')
+    return `project:${url.hostname.toLocaleLowerCase()}${path.toLocaleLowerCase()}`
+  } catch {
+    return `project:source:${rawSource.toLocaleLowerCase().replace(/\s+/g, '-')}`
+  }
+}
+
+export function legacyProjectId(project: Pick<Project, 'track' | 'rank'>): string {
+  return `${project.track}#${project.rank}`
 }
 
 function formOf(project: ProjectInput): ProjectForm {
@@ -103,6 +122,7 @@ function experienceOf(project: ProjectInput): ProjectExperience {
 }
 
 export function enrichProject(input: ProjectInput): Project {
+  const id = projectIdOf(input)
   const form = input.profile?.form ?? formOf(input)
   const goal = input.profile?.goal ?? goalOf(input)
   const time = input.profile?.time ?? timeOf(input)
@@ -112,5 +132,5 @@ export function enrichProject(input: ProjectInput): Project {
   const wow = input.scores?.wow ?? Math.min(98, Math.round((key === 'play' ? 90 : key === 'use' ? 72 : 80) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.3))
   const useful = input.scores?.useful ?? Math.min(98, Math.round((key === 'use' ? 90 : key === 'play' ? 70 : 84) - (input.rank - 1) * 0.6 + Math.min(input.likes, 30) * 0.25))
   const total = input.scores?.total ?? Math.round((ease + wow + useful) / 3)
-  return { ...input, form, goal, time, exp, ease, wow, useful, total }
+  return { ...input, id, form, goal, time, exp, ease, wow, useful, total }
 }

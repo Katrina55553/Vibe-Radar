@@ -16,7 +16,7 @@ interface Props {
 }
 
 const tabs: Array<[BoardTab, string]> = [['all', '全部'], ['play', '好玩'], ['use', '好用'], ['make', '好搓（硬件）']]
-const projectId = (project: Project) => `${project.track}#${project.rank}`
+const projectId = (project: Project) => project.id
 const pageSize = 12
 
 function initialVisibleCounts() {

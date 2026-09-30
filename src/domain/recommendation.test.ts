@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { projectInputs } from '../data/projects'
 import { defaultPicks } from '../data/content'
-import { enrichProject } from './project'
+import { enrichProject, projectIdOf } from './project'
 import { matchesQuery, recommendProjects } from './recommendation'
 
 const projects = projectInputs.map(enrichProject)
@@ -39,5 +39,11 @@ describe('project recommendation', () => {
     expect(matchesQuery(project, project.title.slice(0, 3))).toBe(true)
     expect(matchesQuery(project, project.tags[0]!)).toBe(true)
     expect(matchesQuery(project, '肯定不存在的搜索词')).toBe(false)
+  })
+
+  it('keeps project IDs stable when rank or track changes', () => {
+    const input = projectInputs[0]!
+    expect(projectIdOf({ ...input, rank: 999, track: '最好用的项目' })).toBe(projectIdOf(input))
+    expect(projectIdOf({ ...input, id: 'project:fixed-id' })).toBe('project:fixed-id')
   })
 })
