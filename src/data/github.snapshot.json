@@ -1,35 +1,24 @@
 {
-  "generatedAt": "2026-09-28T09:11:28.812Z",
-  "periodStart": "2026-09-21T09:11:28.812Z",
+  "generatedAt": "2026-10-02T05:23:55.313Z",
+  "periodStart": "2026-09-25T05:23:55.313Z",
   "source": "github-trending-weekly",
   "candidates": [
     {
-      "repo": "anthropics/financial-services",
-      "url": "https://github.com/anthropics/financial-services",
-      "stars": 37938,
-      "weeklyGrowth": 2606,
-      "description": "GitHub 暂未提供项目描述。",
-      "topics": [],
-      "language": "Python",
-      "updatedAt": "2026-09-28T09:02:39Z",
-      "pushedAt": "2026-09-21T21:10:41Z"
-    },
-    {
       "repo": "paperclipai/paperclip",
       "url": "https://github.com/paperclipai/paperclip",
-      "stars": 91199,
-      "weeklyGrowth": 7364,
+      "stars": 95922,
+      "weeklyGrowth": 14335,
       "description": "The open-source app everyone uses to manage agents at work",
       "topics": [],
       "language": "TypeScript",
-      "updatedAt": "2026-09-28T09:11:30Z",
-      "pushedAt": "2026-09-28T05:40:07Z"
+      "updatedAt": "2026-10-02T05:23:54Z",
+      "pushedAt": "2026-10-02T05:18:24Z"
     },
     {
       "repo": "vectorize-io/hindsight",
       "url": "https://github.com/vectorize-io/hindsight",
-      "stars": 39086,
-      "weeklyGrowth": 11089,
+      "stars": 44393,
+      "weeklyGrowth": 17403,
       "description": "Hindsight: Agent Memory That Learns",
       "topics": [
         "agentic-ai",
@@ -38,175 +27,38 @@
         "memory"
       ],
       "language": "Python",
-      "updatedAt": "2026-09-28T09:11:23Z",
-      "pushedAt": "2026-09-28T09:00:55Z"
+      "updatedAt": "2026-10-02T05:20:43Z",
+      "pushedAt": "2026-10-01T21:37:15Z"
     },
     {
-      "repo": "cloudflare/security-audit-skill",
-      "url": "https://github.com/cloudflare/security-audit-skill",
-      "stars": 22493,
-      "weeklyGrowth": 4805,
-      "description": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
-      "topics": [],
-      "language": "JavaScript",
-      "updatedAt": "2026-09-28T09:09:00Z",
-      "pushedAt": "2026-09-14T19:29:02Z"
-    },
-    {
-      "repo": "Tencent/WeKnora",
-      "url": "https://github.com/Tencent/WeKnora",
-      "stars": 30781,
-      "weeklyGrowth": 2705,
-      "description": "Open-source LLM knowledge platform: turn raw documents into a queryable RAG, an autonomous reasoning agent, and a self-maintaining Wiki.",
+      "repo": "debpalash/VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "stars": 51498,
+      "weeklyGrowth": 16114,
+      "description": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages.",
       "topics": [
-        "agent",
-        "agentic",
         "ai",
-        "chatbot",
-        "dsh-plugin",
-        "embeddings",
-        "evaluation",
-        "generative-ai",
-        "golang",
-        "knowledge-base",
-        "llm",
-        "multi-tenant"
-      ],
-      "language": "Go",
-      "updatedAt": "2026-09-28T09:11:02Z",
-      "pushedAt": "2026-09-28T04:56:00Z"
-    },
-    {
-      "repo": "davila7/claude-code-templates",
-      "url": "https://github.com/davila7/claude-code-templates",
-      "stars": 32023,
-      "weeklyGrowth": 1154,
-      "description": "CLI tool for configuring and monitoring Claude Code",
-      "topics": [
-        "anthropic",
-        "anthropic-claude",
-        "claude",
-        "claude-code"
+        "audiobook",
+        "cuda",
+        "dubbing",
+        "elevenlabs-alternative",
+        "huggingface",
+        "local-first",
+        "mlx",
+        "omnivoice-studio",
+        "speech-to-text",
+        "tauri",
+        "text-to-speech"
       ],
       "language": "Python",
-      "updatedAt": "2026-09-28T09:02:38Z",
-      "pushedAt": "2026-09-28T04:29:33Z"
-    },
-    {
-      "repo": "stablyai/orca",
-      "url": "https://github.com/stablyai/orca",
-      "stars": 80085,
-      "weeklyGrowth": 6227,
-      "description": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
-      "topics": [
-        "ade",
-        "agent-ide",
-        "ai-agents",
-        "claude-code",
-        "cli",
-        "codex",
-        "cursor-agent",
-        "devtools",
-        "ghostty",
-        "ide",
-        "mobile-app",
-        "opencode"
-      ],
-      "language": "TypeScript",
-      "updatedAt": "2026-09-28T09:10:11Z",
-      "pushedAt": "2026-09-28T09:09:48Z"
-    },
-    {
-      "repo": "vercel/next.js",
-      "url": "https://github.com/vercel/next.js",
-      "stars": 142824,
-      "weeklyGrowth": 496,
-      "description": "The React Framework",
-      "topics": [
-        "blog",
-        "browser",
-        "compiler",
-        "components",
-        "hybrid",
-        "nextjs",
-        "node",
-        "react",
-        "server-rendering",
-        "ssg",
-        "static",
-        "static-site-generator"
-      ],
-      "language": "JavaScript",
-      "updatedAt": "2026-09-28T09:10:04Z",
-      "pushedAt": "2026-09-28T09:09:59Z"
-    },
-    {
-      "repo": "HKUDS/CLI-Anything",
-      "url": "https://github.com/HKUDS/CLI-Anything",
-      "stars": 50811,
-      "weeklyGrowth": 1105,
-      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
-      "topics": [],
-      "language": "Python",
-      "updatedAt": "2026-09-28T08:59:02Z",
-      "pushedAt": "2026-09-22T02:01:29Z"
-    },
-    {
-      "repo": "pytorch/pytorch",
-      "url": "https://github.com/pytorch/pytorch",
-      "stars": 103436,
-      "weeklyGrowth": 320,
-      "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
-      "topics": [
-        "autograd",
-        "deep-learning",
-        "gpu",
-        "machine-learning",
-        "neural-network",
-        "numpy",
-        "python",
-        "tensor"
-      ],
-      "language": "Python",
-      "updatedAt": "2026-09-28T08:26:57Z",
-      "pushedAt": "2026-09-28T09:11:30Z"
-    },
-    {
-      "repo": "anthropics/claude-code",
-      "url": "https://github.com/anthropics/claude-code",
-      "stars": 148407,
-      "weeklyGrowth": 1493,
-      "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
-      "topics": [],
-      "language": "TypeScript",
-      "updatedAt": "2026-09-28T09:07:12Z",
-      "pushedAt": "2026-09-27T22:20:45Z"
-    },
-    {
-      "repo": "affaan-m/ECC",
-      "url": "https://github.com/affaan-m/ECC",
-      "stars": 268594,
-      "weeklyGrowth": 5175,
-      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-      "topics": [
-        "ai-agents",
-        "anthropic",
-        "claude",
-        "claude-code",
-        "developer-tools",
-        "llm",
-        "mcp",
-        "productivity"
-      ],
-      "language": "JavaScript",
-      "updatedAt": "2026-09-28T09:09:58Z",
-      "pushedAt": "2026-09-28T08:31:50Z"
+      "updatedAt": "2026-10-02T05:22:58Z",
+      "pushedAt": "2026-10-02T05:22:31Z"
     },
     {
       "repo": "rohitg00/ai-engineering-from-scratch",
       "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
-      "stars": 59889,
-      "weeklyGrowth": 3850,
+      "stars": 62494,
+      "weeklyGrowth": 6469,
       "description": "Learn it. Build it. Ship it for others.",
       "topics": [
         "agents",
@@ -223,49 +75,111 @@
         "mcp"
       ],
       "language": "Python",
-      "updatedAt": "2026-09-28T09:11:26Z",
-      "pushedAt": "2026-09-28T06:30:42Z"
+      "updatedAt": "2026-10-02T05:15:42Z",
+      "pushedAt": "2026-09-30T18:27:51Z"
     },
     {
-      "repo": "alibaba/open-code-review",
-      "url": "https://github.com/alibaba/open-code-review",
-      "stars": 42079,
-      "weeklyGrowth": 3727,
-      "description": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+      "repo": "anthropics/financial-services",
+      "url": "https://github.com/anthropics/financial-services",
+      "stars": 38488,
+      "weeklyGrowth": 1270,
+      "description": "GitHub 暂未提供项目描述。",
+      "topics": [],
+      "language": "Python",
+      "updatedAt": "2026-10-02T04:59:23Z",
+      "pushedAt": "2026-09-21T21:10:41Z"
+    },
+    {
+      "repo": "vercel/next.js",
+      "url": "https://github.com/vercel/next.js",
+      "stars": 142998,
+      "weeklyGrowth": 624,
+      "description": "The React Framework",
       "topics": [
-        "agent",
+        "blog",
+        "browser",
+        "compiler",
+        "components",
+        "hybrid",
+        "nextjs",
+        "node",
+        "react",
+        "server-rendering",
+        "ssg",
+        "static",
+        "static-site-generator"
+      ],
+      "language": "JavaScript",
+      "updatedAt": "2026-10-02T05:07:52Z",
+      "pushedAt": "2026-10-02T05:06:05Z"
+    },
+    {
+      "repo": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "stars": 73807,
+      "weeklyGrowth": 2704,
+      "description": "The design language that makes your AI harness better at design.",
+      "topics": [],
+      "language": "JavaScript",
+      "updatedAt": "2026-10-02T05:21:09Z",
+      "pushedAt": "2026-10-02T05:00:01Z"
+    },
+    {
+      "repo": "HKUDS/CLI-Anything",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "stars": 51276,
+      "weeklyGrowth": 1055,
+      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
+      "topics": [],
+      "language": "Python",
+      "updatedAt": "2026-10-02T05:23:09Z",
+      "pushedAt": "2026-09-22T02:01:29Z"
+    },
+    {
+      "repo": "alirezarezvani/claude-skills",
+      "url": "https://github.com/alirezarezvani/claude-skills",
+      "stars": 27207,
+      "weeklyGrowth": 743,
+      "description": "380 Claude Code skills & agent skills & plugins (30+ Agents, 70+ custom commands, 380+ skills, customizable references, scripts)for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents — engineering, marketing, product, compliance, C-level advisory, research, business operations, commercial & finance, and your daily productivity skills.",
+      "topics": [
+        "agent-plugins",
         "agent-skills",
-        "code-review",
-        "code-review-assistant",
-        "harness",
-        "repository-level-context"
+        "agentic-ai",
+        "ai-coding-agent",
+        "anthropic-claude",
+        "claude-ai",
+        "claude-code",
+        "claude-code-plugins",
+        "claude-code-skills",
+        "claude-skills",
+        "codex-skills",
+        "coding-agent-plugins"
       ],
-      "language": "Go",
-      "updatedAt": "2026-09-28T09:11:18Z",
-      "pushedAt": "2026-09-28T09:09:11Z"
+      "language": "Python",
+      "updatedAt": "2026-10-02T05:15:57Z",
+      "pushedAt": "2026-08-30T09:46:16Z"
     },
     {
-      "repo": "cloudflare/quiche",
-      "url": "https://github.com/cloudflare/quiche",
-      "stars": 12674,
-      "weeklyGrowth": 521,
-      "description": "🥧 Savoury implementation of the QUIC transport protocol and HTTP/3",
+      "repo": "davila7/claude-code-templates",
+      "url": "https://github.com/davila7/claude-code-templates",
+      "stars": 32284,
+      "weeklyGrowth": 601,
+      "description": "CLI tool for configuring and monitoring Claude Code",
       "topics": [
-        "http3",
-        "network-programming",
-        "protocol",
-        "quic",
-        "rust"
+        "anthropic",
+        "anthropic-claude",
+        "claude",
+        "claude-code"
       ],
-      "language": "Rust",
-      "updatedAt": "2026-09-28T08:57:03Z",
-      "pushedAt": "2026-09-25T15:50:13Z"
+      "language": "Python",
+      "updatedAt": "2026-10-02T05:22:07Z",
+      "pushedAt": "2026-10-02T03:15:08Z"
     },
     {
       "repo": "TencentCloud/Octop",
       "url": "https://github.com/TencentCloud/Octop",
-      "stars": 5414,
-      "weeklyGrowth": 869,
+      "stars": 6275,
+      "weeklyGrowth": 1360,
       "description": "A smarter, self-hosted AI assistant — multi-user, multi-agent.",
       "topics": [
         "agent",
@@ -277,30 +191,124 @@
         "long-term-memory"
       ],
       "language": "Python",
-      "updatedAt": "2026-09-28T09:10:48Z",
-      "pushedAt": "2026-09-28T08:26:47Z"
+      "updatedAt": "2026-10-02T04:58:45Z",
+      "pushedAt": "2026-09-30T07:13:09Z"
     },
     {
-      "repo": "anthropics/knowledge-work-plugins",
-      "url": "https://github.com/anthropics/knowledge-work-plugins",
-      "stars": 25788,
-      "weeklyGrowth": 478,
-      "description": "Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork",
+      "repo": "agent-substrate/substrate",
+      "url": "https://github.com/agent-substrate/substrate",
+      "stars": 4131,
+      "weeklyGrowth": 365,
+      "description": "Agent Substrate: the core system",
+      "topics": [],
+      "language": "Go",
+      "updatedAt": "2026-10-02T05:17:41Z",
+      "pushedAt": "2026-10-02T05:08:58Z"
+    },
+    {
+      "repo": "tile-ai/tilelang",
+      "url": "https://github.com/tile-ai/tilelang",
+      "stars": 8157,
+      "weeklyGrowth": 481,
+      "description": " Domain-specific language designed to streamline the development of high-performance GPU/CPU/Accelerators kernels",
       "topics": [],
       "language": "Python",
-      "updatedAt": "2026-09-28T08:40:59Z",
-      "pushedAt": "2026-09-26T07:31:12Z"
+      "updatedAt": "2026-10-02T05:23:22Z",
+      "pushedAt": "2026-09-30T04:08:46Z"
+    },
+    {
+      "repo": "anthropics/claude-code-action",
+      "url": "https://github.com/anthropics/claude-code-action",
+      "stars": 9340,
+      "weeklyGrowth": 376,
+      "description": "GitHub 暂未提供项目描述。",
+      "topics": [],
+      "language": "TypeScript",
+      "updatedAt": "2026-10-02T04:34:29Z",
+      "pushedAt": "2026-10-01T18:05:26Z"
+    },
+    {
+      "repo": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer",
+      "stars": 22268,
+      "weeklyGrowth": 5267,
+      "description": "The Office Harness for AI Agents — Spreadsheets, Docs, Slides, Canvas, Relational Tables, and PDF in one runtime.",
+      "topics": [
+        "board",
+        "collaboration",
+        "data-table",
+        "doc",
+        "docx",
+        "excel",
+        "grid",
+        "pdf",
+        "ppt",
+        "pptx",
+        "presentation",
+        "sdk"
+      ],
+      "language": "TypeScript",
+      "updatedAt": "2026-10-02T05:11:01Z",
+      "pushedAt": "2026-10-02T01:05:00Z"
     },
     {
       "repo": "FxEmbed/FxEmbed",
       "url": "https://github.com/FxEmbed/FxEmbed",
-      "stars": 5524,
-      "weeklyGrowth": 432,
+      "stars": 5635,
+      "weeklyGrowth": 369,
       "description": "Fix X/Twitter and Bluesky embeds! Use multiple images, videos, polls, translations and more on Discord, Telegram and others",
       "topics": [],
       "language": "TypeScript",
-      "updatedAt": "2026-09-28T09:08:04Z",
-      "pushedAt": "2026-09-28T05:55:07Z"
+      "updatedAt": "2026-10-02T05:20:04Z",
+      "pushedAt": "2026-10-01T15:49:23Z"
+    },
+    {
+      "repo": "flutter/flutter",
+      "url": "https://github.com/flutter/flutter",
+      "stars": 179234,
+      "weeklyGrowth": 147,
+      "description": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+      "topics": [
+        "android",
+        "app-framework",
+        "cross-platform",
+        "dart",
+        "dart-platform",
+        "desktop",
+        "flutter",
+        "flutter-package",
+        "fuchsia",
+        "ios",
+        "linux-desktop",
+        "macos"
+      ],
+      "language": "Dart",
+      "updatedAt": "2026-10-02T05:06:00Z",
+      "pushedAt": "2026-10-02T04:16:00Z"
+    },
+    {
+      "repo": "androoAGI/starnet",
+      "url": "https://github.com/androoAGI/starnet",
+      "stars": 918,
+      "weeklyGrowth": 592,
+      "description": "A living pixel-art station where real AI agents do real work. Local-first desktop agent harness - bring your own key, watch your crew actually run.",
+      "topics": [
+        "agent-harness",
+        "ai",
+        "ai-agents",
+        "byok",
+        "desktop-app",
+        "game-ui",
+        "llm",
+        "local-first",
+        "multi-agent",
+        "openrouter",
+        "pixel-art",
+        "tauri"
+      ],
+      "language": "JavaScript",
+      "updatedAt": "2026-10-02T04:32:35Z",
+      "pushedAt": "2026-09-28T21:02:04Z"
     }
   ]
 }
