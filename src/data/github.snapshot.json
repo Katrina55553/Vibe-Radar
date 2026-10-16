@@ -1,13 +1,37 @@
 {
-  "generatedAt": "2026-10-09T05:55:39.282Z",
-  "periodStart": "2026-10-02T05:55:39.282Z",
+  "generatedAt": "2026-10-16T04:19:16.546Z",
+  "periodStart": "2026-10-09T04:19:16.546Z",
   "source": "github-trending-weekly",
   "candidates": [
     {
+      "repo": "morluto/rea",
+      "url": "https://github.com/morluto/rea",
+      "stars": 274860,
+      "weeklyGrowth": 239477,
+      "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+      "topics": [
+        "agent-skills",
+        "ai-agents",
+        "binary-analysis",
+        "claude-code",
+        "cli",
+        "codex",
+        "cordis",
+        "decompiler",
+        "developer-tools",
+        "dsh",
+        "dsh-plugin",
+        "ghidra"
+      ],
+      "language": "TypeScript",
+      "updatedAt": "2026-10-16T04:19:16Z",
+      "pushedAt": "2026-10-16T04:03:04Z"
+    },
+    {
       "repo": "boykopovar/AnyPS5",
       "url": "https://github.com/boykopovar/AnyPS5",
-      "stars": 16774,
-      "weeklyGrowth": 10243,
+      "stars": 38873,
+      "weeklyGrowth": 25174,
       "description": "Tool for automatic PS5 executables porting to Linux and Windows",
       "topics": [
         "anyps5",
@@ -19,37 +43,25 @@
         "vulkan"
       ],
       "language": "C++",
-      "updatedAt": "2026-10-09T05:55:31Z",
-      "pushedAt": "2026-10-08T22:46:53Z"
+      "updatedAt": "2026-10-16T04:18:09Z",
+      "pushedAt": "2026-10-15T21:58:29Z"
     },
     {
-      "repo": "mvschwarz/openrig",
-      "url": "https://github.com/mvschwarz/openrig",
-      "stars": 6216,
-      "weeklyGrowth": 2693,
-      "description": "Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
-      "topics": [
-        "agent-harness",
-        "agent-orchestration",
-        "agent-skills",
-        "ai-coding",
-        "claude-code",
-        "cli",
-        "codex-cli",
-        "multi-agent",
-        "multi-agent-systems",
-        "tmux",
-        "typescript"
-      ],
-      "language": "TypeScript",
-      "updatedAt": "2026-10-09T05:54:57Z",
-      "pushedAt": "2026-10-09T05:49:32Z"
+      "repo": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "stars": 293073,
+      "weeklyGrowth": 12147,
+      "description": "Skills for Real Engineers. Straight from my .agents directory.",
+      "topics": [],
+      "language": "Shell",
+      "updatedAt": "2026-10-16T04:17:38Z",
+      "pushedAt": "2026-10-13T08:46:40Z"
     },
     {
       "repo": "heygen-com/hyperframes",
       "url": "https://github.com/heygen-com/hyperframes",
-      "stars": 59333,
-      "weeklyGrowth": 3996,
+      "stars": 64690,
+      "weeklyGrowth": 5318,
       "description": "Write HTML. Render video. Built for agents.",
       "topics": [
         "ai",
@@ -65,95 +77,62 @@
         "video"
       ],
       "language": "TypeScript",
-      "updatedAt": "2026-10-09T05:52:10Z",
-      "pushedAt": "2026-10-09T05:30:42Z"
+      "updatedAt": "2026-10-16T04:18:29Z",
+      "pushedAt": "2026-10-16T03:23:48Z"
     },
     {
-      "repo": "EpicGames/raddebugger",
-      "url": "https://github.com/EpicGames/raddebugger",
-      "stars": 8169,
-      "weeklyGrowth": 448,
-      "description": "A native, user-mode, multi-process, graphical debugger.",
-      "topics": [],
-      "language": "C",
-      "updatedAt": "2026-10-09T05:55:22Z",
-      "pushedAt": "2026-10-07T20:56:17Z"
-    },
-    {
-      "repo": "cursor/plugins",
-      "url": "https://github.com/cursor/plugins",
-      "stars": 10438,
-      "weeklyGrowth": 1109,
-      "description": "Cursor plugin specification and official plugins",
-      "topics": [],
-      "language": "TypeScript",
-      "updatedAt": "2026-10-09T05:55:22Z",
-      "pushedAt": "2026-10-08T00:45:15Z"
-    },
-    {
-      "repo": "thedotmack/claude-mem",
-      "url": "https://github.com/thedotmack/claude-mem",
-      "stars": 98664,
-      "weeklyGrowth": 3153,
-      "description": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
+      "repo": "cathrynlavery/diagram-design",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "stars": 56020,
+      "weeklyGrowth": 10237,
+      "description": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, and Pi. 44 diagram types. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
       "topics": [
-        "ai",
-        "ai-agents",
-        "ai-memory",
-        "anthropic",
-        "artificial-intelligence",
-        "chromadb",
-        "claude",
-        "claude-agent-sdk",
-        "claude-agents",
+        "agent-skills",
         "claude-code",
-        "claude-code-plugin",
-        "claude-skills"
+        "codex",
+        "data-visualization",
+        "diagrams",
+        "drawio",
+        "mermaid",
+        "svg"
+      ],
+      "language": "HTML",
+      "updatedAt": "2026-10-16T04:17:42Z",
+      "pushedAt": "2026-10-16T03:03:41Z"
+    },
+    {
+      "repo": "NationalSecurityAgency/ghidra",
+      "url": "https://github.com/NationalSecurityAgency/ghidra",
+      "stars": 88944,
+      "weeklyGrowth": 6614,
+      "description": "Ghidra is a software reverse engineering (SRE) framework",
+      "topics": [
+        "disassembler",
+        "reverse-engineering",
+        "software-analysis"
+      ],
+      "language": "Java",
+      "updatedAt": "2026-10-16T04:19:06Z",
+      "pushedAt": "2026-10-15T12:02:03Z"
+    },
+    {
+      "repo": "ranxianglei/billion-context",
+      "url": "https://github.com/ranxianglei/billion-context",
+      "stars": 1412,
+      "weeklyGrowth": 659,
+      "description": "A context-compression plugin for small context windows (a 100K context is enough), token savings (5x fewer tokens), and month-long single sessions (billions of tokens).上下文压缩插件，兼顾小窗口(100k上下文足矣)省token(省5倍token)和超长会话(数月级别几十亿token单会话)。billion-context is all you need",
+      "topics": [
+        "dsh-plugin"
       ],
       "language": "TypeScript",
-      "updatedAt": "2026-10-09T05:54:42Z",
-      "pushedAt": "2026-10-09T03:34:45Z"
-    },
-    {
-      "repo": "mattpocock/skills",
-      "url": "https://github.com/mattpocock/skills",
-      "stars": 281439,
-      "weeklyGrowth": 7448,
-      "description": "Skills for Real Engineers. Straight from my .agents directory.",
-      "topics": [],
-      "language": "Shell",
-      "updatedAt": "2026-10-09T05:54:40Z",
-      "pushedAt": "2026-10-08T08:49:07Z"
-    },
-    {
-      "repo": "Panniantong/Agent-Reach",
-      "url": "https://github.com/Panniantong/Agent-Reach",
-      "stars": 94316,
-      "weeklyGrowth": 6987,
-      "description": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
-      "topics": [
-        "agent-infrastructure",
-        "ai-agent",
-        "ai-search",
-        "automation",
-        "bilibili",
-        "claude-code",
-        "cli",
-        "cursor",
-        "free-api",
-        "llm-tools",
-        "mcp",
-        "python"
-      ],
-      "language": "Python",
-      "updatedAt": "2026-10-09T05:55:18Z",
-      "pushedAt": "2026-10-08T08:31:08Z"
+      "updatedAt": "2026-10-16T03:51:10Z",
+      "pushedAt": "2026-10-16T04:16:12Z"
     },
     {
       "repo": "earthtojake/text-to-cad",
       "url": "https://github.com/earthtojake/text-to-cad",
-      "stars": 18537,
-      "weeklyGrowth": 1898,
+      "stars": 20755,
+      "weeklyGrowth": 2244,
       "description": "Give your agent CAD superpowers.",
       "topics": [
         "agents",
@@ -167,14 +146,25 @@
         "text-to-cad"
       ],
       "language": "Python",
-      "updatedAt": "2026-10-09T05:54:59Z",
-      "pushedAt": "2026-10-09T05:53:42Z"
+      "updatedAt": "2026-10-16T03:58:50Z",
+      "pushedAt": "2026-10-16T04:11:32Z"
+    },
+    {
+      "repo": "twostraws/SwiftUI-Agent-Skill",
+      "url": "https://github.com/twostraws/SwiftUI-Agent-Skill",
+      "stars": 6114,
+      "weeklyGrowth": 900,
+      "description": "SwiftUI agent skill for Claude Code, Codex, and other AI tools.",
+      "topics": [],
+      "language": "Other",
+      "updatedAt": "2026-10-16T04:18:42Z",
+      "pushedAt": "2026-10-07T13:39:28Z"
     },
     {
       "repo": "DuarteSantos8/openGym",
       "url": "https://github.com/DuarteSantos8/openGym",
-      "stars": 8155,
-      "weeklyGrowth": 6086,
+      "stars": 12439,
+      "weeklyGrowth": 4471,
       "description": "Self-hosted gym & body-weight tracker — plan routines, log workouts (supersets, warm-ups, cardio), see which muscles are trained, fatigued or detrained, import from FitNotes/Strong/Hevy, passkey login. Your data, your server.",
       "topics": [
         "bodyweight",
@@ -191,19 +181,19 @@
         "react"
       ],
       "language": "JavaScript",
-      "updatedAt": "2026-10-09T05:55:26Z",
-      "pushedAt": "2026-10-08T13:32:09Z"
+      "updatedAt": "2026-10-16T04:16:03Z",
+      "pushedAt": "2026-10-15T19:31:37Z"
     },
     {
-      "repo": "pablostanley/yoinks",
-      "url": "https://github.com/pablostanley/yoinks",
-      "stars": 5471,
-      "weeklyGrowth": 2706,
-      "description": "yoink any video from your terminal. no shady ads.",
+      "repo": "cursor/plugins",
+      "url": "https://github.com/cursor/plugins",
+      "stars": 11682,
+      "weeklyGrowth": 1214,
+      "description": "Cursor plugin specification and official plugins",
       "topics": [],
       "language": "TypeScript",
-      "updatedAt": "2026-10-09T05:50:04Z",
-      "pushedAt": "2026-07-17T06:40:05Z"
+      "updatedAt": "2026-10-16T04:17:52Z",
+      "pushedAt": "2026-10-16T03:24:20Z"
     }
   ]
 }
