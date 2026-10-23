@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-16T04:19:16.546Z",
-  "periodStart": "2026-10-09T04:19:16.546Z",
+  "generatedAt": "2026-10-23T04:33:34.383Z",
+  "periodStart": "2026-10-16T04:33:34.383Z",
   "source": "github-trending-weekly",
   "candidates": [
     {
       "repo": "morluto/rea",
       "url": "https://github.com/morluto/rea",
-      "stars": 274860,
-      "weeklyGrowth": 239477,
+      "stars": 367448,
+      "weeklyGrowth": 106341,
       "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
       "topics": [
         "agent-skills",
@@ -24,87 +24,182 @@
         "ghidra"
       ],
       "language": "TypeScript",
-      "updatedAt": "2026-10-16T04:19:16Z",
-      "pushedAt": "2026-10-16T04:03:04Z"
+      "updatedAt": "2026-10-23T04:33:35Z",
+      "pushedAt": "2026-10-23T03:53:10Z"
     },
     {
-      "repo": "boykopovar/AnyPS5",
-      "url": "https://github.com/boykopovar/AnyPS5",
-      "stars": 38873,
-      "weeklyGrowth": 25174,
-      "description": "Tool for automatic PS5 executables porting to Linux and Windows",
+      "repo": "anthropics/claude-plugins-official",
+      "url": "https://github.com/anthropics/claude-plugins-official",
+      "stars": 43941,
+      "weeklyGrowth": 5649,
+      "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
       "topics": [
-        "anyps5",
-        "dynamic-library",
-        "game-porting",
-        "ps5",
-        "ps5-tools",
-        "spir-v",
-        "vulkan"
+        "claude-code",
+        "mcp",
+        "skills"
       ],
-      "language": "C++",
-      "updatedAt": "2026-10-16T04:18:09Z",
-      "pushedAt": "2026-10-15T21:58:29Z"
+      "language": "Python",
+      "updatedAt": "2026-10-23T04:21:16Z",
+      "pushedAt": "2026-10-23T01:40:29Z"
     },
     {
-      "repo": "mattpocock/skills",
-      "url": "https://github.com/mattpocock/skills",
-      "stars": 293073,
-      "weeklyGrowth": 12147,
-      "description": "Skills for Real Engineers. Straight from my .agents directory.",
+      "repo": "ruvnet/ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "stars": 78528,
+      "weeklyGrowth": 3708,
+      "description": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated",
+      "topics": [
+        "agentic-ai",
+        "agentic-framework",
+        "agentic-workflow",
+        "agents",
+        "ai-agents",
+        "ai-assistant",
+        "ai-skills",
+        "autonomous-agents",
+        "claude",
+        "codex",
+        "dsh-plugin",
+        "harness"
+      ],
+      "language": "TypeScript",
+      "updatedAt": "2026-10-23T04:25:10Z",
+      "pushedAt": "2026-10-23T02:58:58Z"
+    },
+    {
+      "repo": "android/skills",
+      "url": "https://github.com/android/skills",
+      "stars": 9273,
+      "weeklyGrowth": 1384,
+      "description": "GitHub 暂未提供项目描述。",
+      "topics": [
+        "skills"
+      ],
+      "language": "Kotlin",
+      "updatedAt": "2026-10-23T04:32:26Z",
+      "pushedAt": "2026-10-21T13:55:04Z"
+    },
+    {
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "stars": 53947,
+      "weeklyGrowth": 3967,
+      "description": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 250,000+ scientists worldwide. 177 ready-to-use validated skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard.",
+      "topics": [
+        "agent-skills",
+        "ai-scientist",
+        "bioinformatics",
+        "chemoinformatics",
+        "claude",
+        "claude-skills",
+        "claudecode",
+        "clinical-research",
+        "computational-biology",
+        "data-analysis",
+        "drug-discovery",
+        "genomics"
+      ],
+      "language": "Python",
+      "updatedAt": "2026-10-23T04:32:48Z",
+      "pushedAt": "2026-10-19T09:33:57Z"
+    },
+    {
+      "repo": "anomalyco/opencode",
+      "url": "https://github.com/anomalyco/opencode",
+      "stars": 220277,
+      "weeklyGrowth": 6750,
+      "description": "The open source coding agent.",
       "topics": [],
-      "language": "Shell",
-      "updatedAt": "2026-10-16T04:17:38Z",
-      "pushedAt": "2026-10-13T08:46:40Z"
+      "language": "TypeScript",
+      "updatedAt": "2026-10-23T04:31:06Z",
+      "pushedAt": "2026-10-23T04:32:52Z"
+    },
+    {
+      "repo": "HKUDS/CLI-Anything",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "stars": 56303,
+      "weeklyGrowth": 3275,
+      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
+      "topics": [],
+      "language": "Python",
+      "updatedAt": "2026-10-23T04:33:29Z",
+      "pushedAt": "2026-09-22T02:01:29Z"
+    },
+    {
+      "repo": "cursor/plugins",
+      "url": "https://github.com/cursor/plugins",
+      "stars": 13646,
+      "weeklyGrowth": 2046,
+      "description": "Cursor plugin specification and official plugins",
+      "topics": [],
+      "language": "TypeScript",
+      "updatedAt": "2026-10-23T04:23:57Z",
+      "pushedAt": "2026-10-23T03:15:24Z"
+    },
+    {
+      "repo": "akitaonrails/ai-memory",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "stars": 12825,
+      "weeklyGrowth": 3322,
+      "description": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+      "topics": [],
+      "language": "Rust",
+      "updatedAt": "2026-10-23T04:30:08Z",
+      "pushedAt": "2026-10-23T01:47:40Z"
+    },
+    {
+      "repo": "debpalash/VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "stars": 81960,
+      "weeklyGrowth": 13581,
+      "description": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages.",
+      "topics": [
+        "ai",
+        "audiobook",
+        "cuda",
+        "dubbing",
+        "elevenlabs-alternative",
+        "huggingface",
+        "local-first",
+        "mlx",
+        "omnivoice-studio",
+        "speech-to-text",
+        "text-to-speech",
+        "transcription"
+      ],
+      "language": "Python",
+      "updatedAt": "2026-10-23T04:31:58Z",
+      "pushedAt": "2026-10-23T04:26:49Z"
     },
     {
       "repo": "heygen-com/hyperframes",
       "url": "https://github.com/heygen-com/hyperframes",
-      "stars": 64690,
-      "weeklyGrowth": 5318,
+      "stars": 70133,
+      "weeklyGrowth": 5669,
       "description": "Write HTML. Render video. Built for agents.",
       "topics": [
         "ai",
+        "ai-agents",
         "animation",
+        "claude-code",
         "ffmpeg",
         "framework",
         "gsap",
         "html",
+        "html-to-video",
         "mcp",
-        "puppeteer",
-        "rendering",
-        "typescript",
-        "video"
+        "motion-graphics",
+        "puppeteer"
       ],
       "language": "TypeScript",
-      "updatedAt": "2026-10-16T04:18:29Z",
-      "pushedAt": "2026-10-16T03:23:48Z"
-    },
-    {
-      "repo": "cathrynlavery/diagram-design",
-      "url": "https://github.com/cathrynlavery/diagram-design",
-      "stars": 56020,
-      "weeklyGrowth": 10237,
-      "description": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, and Pi. 44 diagram types. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
-      "topics": [
-        "agent-skills",
-        "claude-code",
-        "codex",
-        "data-visualization",
-        "diagrams",
-        "drawio",
-        "mermaid",
-        "svg"
-      ],
-      "language": "HTML",
-      "updatedAt": "2026-10-16T04:17:42Z",
-      "pushedAt": "2026-10-16T03:03:41Z"
+      "updatedAt": "2026-10-23T04:33:36Z",
+      "pushedAt": "2026-10-23T04:31:23Z"
     },
     {
       "repo": "NationalSecurityAgency/ghidra",
       "url": "https://github.com/NationalSecurityAgency/ghidra",
-      "stars": 88944,
-      "weeklyGrowth": 6614,
+      "stars": 93248,
+      "weeklyGrowth": 4892,
       "description": "Ghidra is a software reverse engineering (SRE) framework",
       "topics": [
         "disassembler",
@@ -112,88 +207,74 @@
         "software-analysis"
       ],
       "language": "Java",
-      "updatedAt": "2026-10-16T04:19:06Z",
-      "pushedAt": "2026-10-15T12:02:03Z"
+      "updatedAt": "2026-10-23T04:32:53Z",
+      "pushedAt": "2026-10-22T13:16:26Z"
     },
     {
-      "repo": "ranxianglei/billion-context",
-      "url": "https://github.com/ranxianglei/billion-context",
-      "stars": 1412,
-      "weeklyGrowth": 659,
-      "description": "A context-compression plugin for small context windows (a 100K context is enough), token savings (5x fewer tokens), and month-long single sessions (billions of tokens).上下文压缩插件，兼顾小窗口(100k上下文足矣)省token(省5倍token)和超长会话(数月级别几十亿token单会话)。billion-context is all you need",
+      "repo": "stablyai/orca",
+      "url": "https://github.com/stablyai/orca",
+      "stars": 102984,
+      "weeklyGrowth": 9401,
+      "description": "Orca is the place for working with a fleet of agents (e.g. Grok Bot, Claude Code). Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
       "topics": [
-        "dsh-plugin"
+        "ade",
+        "agent-ide",
+        "ai-agents",
+        "automation",
+        "bot",
+        "claude-code",
+        "codex",
+        "ghostty",
+        "grok-bot",
+        "hermes-agent",
+        "mobile-app",
+        "muse"
       ],
       "language": "TypeScript",
-      "updatedAt": "2026-10-16T03:51:10Z",
-      "pushedAt": "2026-10-16T04:16:12Z"
+      "updatedAt": "2026-10-23T04:31:36Z",
+      "pushedAt": "2026-10-23T04:27:49Z"
     },
     {
-      "repo": "earthtojake/text-to-cad",
-      "url": "https://github.com/earthtojake/text-to-cad",
-      "stars": 20755,
-      "weeklyGrowth": 2244,
-      "description": "Give your agent CAD superpowers.",
+      "repo": "Comfy-Org/ComfyUI",
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "stars": 142068,
+      "weeklyGrowth": 4375,
+      "description": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. The fastest local inference engine in the world.",
       "topics": [
-        "agents",
-        "ai-agents",
-        "cad",
-        "mechanical-engineering",
-        "robotics",
-        "step",
-        "stl",
-        "stp",
-        "text-to-cad"
+        "ai",
+        "comfy",
+        "comfyui",
+        "python",
+        "pytorch",
+        "stable-diffusion"
       ],
       "language": "Python",
-      "updatedAt": "2026-10-16T03:58:50Z",
-      "pushedAt": "2026-10-16T04:11:32Z"
+      "updatedAt": "2026-10-23T04:33:27Z",
+      "pushedAt": "2026-10-23T03:29:56Z"
     },
     {
-      "repo": "twostraws/SwiftUI-Agent-Skill",
-      "url": "https://github.com/twostraws/SwiftUI-Agent-Skill",
-      "stars": 6114,
-      "weeklyGrowth": 900,
-      "description": "SwiftUI agent skill for Claude Code, Codex, and other AI tools.",
-      "topics": [],
-      "language": "Other",
-      "updatedAt": "2026-10-16T04:18:42Z",
-      "pushedAt": "2026-10-07T13:39:28Z"
-    },
-    {
-      "repo": "DuarteSantos8/openGym",
-      "url": "https://github.com/DuarteSantos8/openGym",
-      "stars": 12439,
-      "weeklyGrowth": 4471,
-      "description": "Self-hosted gym & body-weight tracker — plan routines, log workouts (supersets, warm-ups, cardio), see which muscles are trained, fatigued or detrained, import from FitNotes/Strong/Hevy, passkey login. Your data, your server.",
+      "repo": "mksglu/context-mode",
+      "url": "https://github.com/mksglu/context-mode",
+      "stars": 31857,
+      "weeklyGrowth": 2271,
+      "description": "Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists session memory, and   enforces routing across 17 platforms via MCP + hooks.",
       "topics": [
-        "bodyweight",
-        "docker",
-        "fitness",
-        "fitness-tracker",
-        "gym",
-        "health",
-        "mcp",
-        "nodejs",
-        "passkeys",
-        "progressive-web-applications",
-        "pwa",
-        "react"
+        "antigravity",
+        "claude",
+        "claude-code",
+        "claude-code-hooks",
+        "claude-code-plugins",
+        "claude-code-skill",
+        "codex",
+        "codex-cli",
+        "context-mode",
+        "copilot",
+        "cursor-plugin",
+        "kiro"
       ],
-      "language": "JavaScript",
-      "updatedAt": "2026-10-16T04:16:03Z",
-      "pushedAt": "2026-10-15T19:31:37Z"
-    },
-    {
-      "repo": "cursor/plugins",
-      "url": "https://github.com/cursor/plugins",
-      "stars": 11682,
-      "weeklyGrowth": 1214,
-      "description": "Cursor plugin specification and official plugins",
-      "topics": [],
       "language": "TypeScript",
-      "updatedAt": "2026-10-16T04:17:52Z",
-      "pushedAt": "2026-10-16T03:24:20Z"
+      "updatedAt": "2026-10-23T04:27:28Z",
+      "pushedAt": "2026-10-23T01:34:53Z"
     }
   ]
 }
