@@ -1,181 +1,221 @@
 {
-  "generatedAt": "2026-11-13T06:24:29.472Z",
-  "periodStart": "2026-11-06T06:24:29.472Z",
+  "generatedAt": "2026-11-20T06:58:32.417Z",
+  "periodStart": "2026-11-13T06:58:32.417Z",
   "source": "github-trending-weekly",
   "candidates": [
     {
-      "repo": "anthropics/skills",
-      "url": "https://github.com/anthropics/skills",
-      "stars": 193817,
-      "weeklyGrowth": 6055,
-      "description": "Public repository for Agent Skills",
+      "repo": "backnotprop/plannotator",
+      "url": "https://github.com/backnotprop/plannotator",
+      "stars": 13733,
+      "weeklyGrowth": 3468,
+      "description": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click. ",
       "topics": [
-        "agent-skills"
-      ],
-      "language": "Python",
-      "updatedAt": "2026-11-13T06:23:54Z",
-      "pushedAt": "2026-11-06T22:32:32Z"
-    },
-    {
-      "repo": "milind-soni/OpenMausBot",
-      "url": "https://github.com/milind-soni/OpenMausBot",
-      "stars": 21837,
-      "weeklyGrowth": 9104,
-      "description": "Open-source Grok Bot alternative with a virtual machine that bots can use",
-      "topics": [
-        "ai-agents",
+        "agents",
         "claude-code",
+        "code-review",
         "codex",
-        "computer-use",
-        "docker",
-        "electron",
-        "grok",
-        "grok-bot",
-        "grok-bot-alternative",
-        "self-hosted",
-        "typescript"
-      ],
-      "language": "TypeScript",
-      "updatedAt": "2026-11-13T06:23:50Z",
-      "pushedAt": "2026-11-13T06:19:14Z"
-    },
-    {
-      "repo": "vercel-labs/agent-browser",
-      "url": "https://github.com/vercel-labs/agent-browser",
-      "stars": 50417,
-      "weeklyGrowth": 4601,
-      "description": "Browser automation CLI for AI agents",
-      "topics": [],
-      "language": "Rust",
-      "updatedAt": "2026-11-13T06:18:12Z",
-      "pushedAt": "2026-11-13T06:09:23Z"
-    },
-    {
-      "repo": "NVIDIA/auto-ontology",
-      "url": "https://github.com/NVIDIA/auto-ontology",
-      "stars": 12330,
-      "weeklyGrowth": 5802,
-      "description": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows.",
-      "topics": [],
-      "language": "Python",
-      "updatedAt": "2026-11-13T06:22:03Z",
-      "pushedAt": "2026-11-13T04:12:37Z"
-    },
-    {
-      "repo": "cloudflare/security-audit-skill",
-      "url": "https://github.com/cloudflare/security-audit-skill",
-      "stars": 71353,
-      "weeklyGrowth": 10700,
-      "description": "A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings",
-      "topics": [],
-      "language": "JavaScript",
-      "updatedAt": "2026-11-13T06:17:44Z",
-      "pushedAt": "2026-09-14T19:29:02Z"
-    },
-    {
-      "repo": "vercel-labs/agent-desktop",
-      "url": "https://github.com/vercel-labs/agent-desktop",
-      "stars": 22875,
-      "weeklyGrowth": 6414,
-      "description": "Computer use CLI for AI agents",
-      "topics": [
-        "accessibility",
-        "accessibility-api",
-        "ai-agents",
-        "automation",
-        "cli",
-        "computer-use",
-        "computer-use-agent",
-        "computer-use-agents",
-        "desktop-automation",
-        "macos",
-        "mcp",
-        "rust"
-      ],
-      "language": "Rust",
-      "updatedAt": "2026-11-13T06:24:09Z",
-      "pushedAt": "2026-11-13T03:29:48Z"
-    },
-    {
-      "repo": "mattpocock/skills",
-      "url": "https://github.com/mattpocock/skills",
-      "stars": 323198,
-      "weeklyGrowth": 8731,
-      "description": "Skills for Real Engineers. Straight from my .agents directory.",
-      "topics": [],
-      "language": "Shell",
-      "updatedAt": "2026-11-13T06:24:21Z",
-      "pushedAt": "2026-11-12T12:11:43Z"
-    },
-    {
-      "repo": "zed-industries/zed",
-      "url": "https://github.com/zed-industries/zed",
-      "stars": 94878,
-      "weeklyGrowth": 2339,
-      "description": "Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.",
-      "topics": [
-        "gpui",
-        "rust-lang",
-        "text-editor",
-        "zed"
-      ],
-      "language": "Rust",
-      "updatedAt": "2026-11-13T06:19:56Z",
-      "pushedAt": "2026-11-13T05:32:40Z"
-    },
-    {
-      "repo": "google-deepmind/mujoco",
-      "url": "https://github.com/google-deepmind/mujoco",
-      "stars": 17797,
-      "weeklyGrowth": 1671,
-      "description": "Multi-Joint dynamics with Contact. A general purpose physics simulator.",
-      "topics": [
-        "mujoco",
-        "physics",
-        "robotics"
-      ],
-      "language": "C++",
-      "updatedAt": "2026-11-13T06:19:38Z",
-      "pushedAt": "2026-11-13T04:56:36Z"
-    },
-    {
-      "repo": "google/skills",
-      "url": "https://github.com/google/skills",
-      "stars": 24099,
-      "weeklyGrowth": 1933,
-      "description": "Agent Skills for Google products and technologies",
-      "topics": [
-        "google",
-        "googlecloud",
+        "obsidian",
+        "opencode",
+        "pi-mono",
+        "plan-mode",
         "skills"
       ],
-      "language": "Python",
-      "updatedAt": "2026-11-13T06:10:01Z",
-      "pushedAt": "2026-11-12T23:00:01Z"
+      "language": "TypeScript",
+      "updatedAt": "2026-11-20T06:52:54Z",
+      "pushedAt": "2026-11-20T06:56:32Z"
     },
     {
-      "repo": "D4Vinci/Scrapling",
-      "url": "https://github.com/D4Vinci/Scrapling",
-      "stars": 102261,
-      "weeklyGrowth": 4743,
-      "description": "🕷️ The BEST Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ and follow here for daily tips and tricks: https://x.com/Scrapling_dev",
+      "repo": "google-labs-code/stitch-skills",
+      "url": "https://github.com/google-labs-code/stitch-skills",
+      "stars": 10814,
+      "weeklyGrowth": 1829,
+      "description": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
+      "topics": [],
+      "language": "TypeScript",
+      "updatedAt": "2026-11-20T06:52:28Z",
+      "pushedAt": "2026-11-18T05:00:25Z"
+    },
+    {
+      "repo": "GoogleChrome/modern-web-guidance-src",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance-src",
+      "stars": 9290,
+      "weeklyGrowth": 6858,
+      "description": "Keep your coding agent up to date with the latest web best practices",
+      "topics": [],
+      "language": "TypeScript",
+      "updatedAt": "2026-11-20T06:54:36Z",
+      "pushedAt": "2026-11-20T06:42:01Z"
+    },
+    {
+      "repo": "alibaba/open-code-review",
+      "url": "https://github.com/alibaba/open-code-review",
+      "stars": 54471,
+      "weeklyGrowth": 4492,
+      "description": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
       "topics": [
-        "ai",
-        "ai-scraping",
-        "automation",
-        "crawler",
-        "crawling",
-        "crawling-python",
-        "data",
-        "data-extraction",
-        "mcp",
-        "mcp-server",
-        "playwright",
-        "python"
+        "agent",
+        "agent-skills",
+        "code-review",
+        "code-review-assistant",
+        "harness",
+        "repository-level-context"
+      ],
+      "language": "Go",
+      "updatedAt": "2026-11-20T06:46:50Z",
+      "pushedAt": "2026-11-20T05:11:18Z"
+    },
+    {
+      "repo": "mvanhorn/last30days-skill",
+      "url": "https://github.com/mvanhorn/last30days-skill",
+      "stars": 70996,
+      "weeklyGrowth": 3179,
+      "description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+      "topics": [
+        "ai-prompts",
+        "ai-skill",
+        "bluesky",
+        "claude",
+        "claude-code",
+        "clawhub",
+        "deep-research",
+        "hackernews",
+        "instagram",
+        "openclaw",
+        "polymarket",
+        "recency"
       ],
       "language": "Python",
-      "updatedAt": "2026-11-13T06:17:48Z",
-      "pushedAt": "2026-11-11T19:16:10Z"
+      "updatedAt": "2026-11-20T06:57:19Z",
+      "pushedAt": "2026-11-20T05:45:47Z"
+    },
+    {
+      "repo": "ChromeDevTools/chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "stars": 58414,
+      "weeklyGrowth": 3229,
+      "description": "Chrome DevTools for coding agents",
+      "topics": [
+        "browser",
+        "chrome",
+        "chrome-devtools",
+        "debugging",
+        "devtools",
+        "mcp",
+        "mcp-server",
+        "puppeteer"
+      ],
+      "language": "TypeScript",
+      "updatedAt": "2026-11-20T06:38:46Z",
+      "pushedAt": "2026-11-20T05:14:01Z"
+    },
+    {
+      "repo": "tradermonty/claude-trading-skills",
+      "url": "https://github.com/tradermonty/claude-trading-skills",
+      "stars": 7302,
+      "weeklyGrowth": 3385,
+      "description": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development.",
+      "topics": [],
+      "language": "Python",
+      "updatedAt": "2026-11-20T06:47:54Z",
+      "pushedAt": "2026-11-19T16:01:27Z"
+    },
+    {
+      "repo": "ag-ui-protocol/ag-ui",
+      "url": "https://github.com/ag-ui-protocol/ag-ui",
+      "stars": 20687,
+      "weeklyGrowth": 3455,
+      "description": "AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications.",
+      "topics": [
+        "ag-ui-protocol",
+        "agent-frontend",
+        "agent-ui",
+        "agentic-workflow",
+        "ai-agents"
+      ],
+      "language": "TypeScript",
+      "updatedAt": "2026-11-20T06:39:01Z",
+      "pushedAt": "2026-11-19T22:12:16Z"
+    },
+    {
+      "repo": "meta/astryx",
+      "url": "https://github.com/meta/astryx",
+      "stars": 31111,
+      "weeklyGrowth": 4977,
+      "description": "An open source design system that's fully customizable and agent ready",
+      "topics": [],
+      "language": "TypeScript",
+      "updatedAt": "2026-11-20T06:56:18Z",
+      "pushedAt": "2026-11-20T06:57:41Z"
+    },
+    {
+      "repo": "pookjw/HermesEnabler",
+      "url": "https://github.com/pookjw/HermesEnabler",
+      "stars": 2263,
+      "weeklyGrowth": 904,
+      "description": "Enable Hermès Watch Faces on any Apple Watch devices",
+      "topics": [],
+      "language": "Objective-C",
+      "updatedAt": "2026-11-20T05:54:03Z",
+      "pushedAt": "2026-11-19T02:24:27Z"
+    },
+    {
+      "repo": "we-promise/sure",
+      "url": "https://github.com/we-promise/sure",
+      "stars": 16769,
+      "weeklyGrowth": 3226,
+      "description": "The personal finance app for everyone (by everyone)",
+      "topics": [],
+      "language": "Ruby",
+      "updatedAt": "2026-11-20T06:47:41Z",
+      "pushedAt": "2026-11-20T06:07:44Z"
+    },
+    {
+      "repo": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer",
+      "stars": 30428,
+      "weeklyGrowth": 7248,
+      "description": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core.",
+      "topics": [
+        "board",
+        "collaboration",
+        "doc",
+        "docx",
+        "excel",
+        "offce365",
+        "office",
+        "pdf",
+        "ppt",
+        "pptx",
+        "presentation",
+        "sdk"
+      ],
+      "language": "TypeScript",
+      "updatedAt": "2026-11-20T06:58:32Z",
+      "pushedAt": "2026-11-20T06:50:54Z"
+    },
+    {
+      "repo": "kajisho5/ffmpeg-skill",
+      "url": "https://github.com/kajisho5/ffmpeg-skill",
+      "stars": 8488,
+      "weeklyGrowth": 2998,
+      "description": "Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys.",
+      "topics": [
+        "agent-skills",
+        "ai-agents",
+        "audio-processing",
+        "captions",
+        "claude-code",
+        "codex",
+        "coding-agent",
+        "cursor",
+        "ffmpeg",
+        "gemini-cli-extension",
+        "loudness-normalization",
+        "mcp"
+      ],
+      "language": "Python",
+      "updatedAt": "2026-11-20T06:57:37Z",
+      "pushedAt": "2026-11-20T06:49:11Z"
     }
   ]
 }
